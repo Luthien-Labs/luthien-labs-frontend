@@ -1,0 +1,7 @@
+$primary-color: #266d29;
+$spacing: 1rem;
+
+@mixin base-styles {
+  margin: 0;
+  padding: $spacing;
+}
