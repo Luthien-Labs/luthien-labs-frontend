@@ -1,13 +1,5 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@import "./src/styles/_variables.scss";`
-        }
-      }
-    }
-  }
+  site: "https://www.luthien-labs.net",
 });
