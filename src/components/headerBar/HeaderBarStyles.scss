@@ -1,0 +1,21 @@
+@use "../../styles/variables" as *;
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#headerBar {
+  margin: 50px;
+  border-radius: 20px;
+  background-color: white;
+  height: 60px;
+  width: 75%;
+}
+
+#luthenLabsLogo {
+  margin: 5px;
+  height: 50px;
+  width: 50px;
+}
