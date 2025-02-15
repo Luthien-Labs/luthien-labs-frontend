@@ -1,11 +1,15 @@
 ---
-import Backdrop from "../components/Backdrop.astro";
+import Backdrop from "../components/common/backdrop/Backdrop.astro";
 import Layout from "../layouts/Layout.astro";
-import HeaderBar from "src/components/headerBar/HeaderBar.astro";
+import HeaderBar from "src/components/header/headerBar/HeaderBar.astro";
+import TitleBar from "src/components/home/titleBar/TitleBar.astro";
+import CopyFrame from "src/components/common/copyFrame/CopyFrame.astro";
 import "../styles/global.scss";
 ---
 
 <Layout>
   <Backdrop />
   <HeaderBar />
+  <TitleBar />
+  <CopyFrame />
 </Layout>

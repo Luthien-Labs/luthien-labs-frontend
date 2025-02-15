@@ -1,5 +1,5 @@
-@use "../../styles/variables" as *;
-@import "../../assets/fonts/fonts.css";
+@use "../../../styles/variables" as *;
+@import "../../../assets/fonts/fonts.css";
 
 #container {
   display: flex;
@@ -21,7 +21,7 @@
   width: 75%;
 }
 
-#luthenLabsLogo {
+#luthienLabsLogo {
   margin-left: 5px;
   margin-bottom: 1px;
   height: 41px;

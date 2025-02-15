@@ -1,0 +1,9 @@
+@use "../../../styles/variables" as *;
+@import "../../../assets/fonts/fonts.css";
+
+#copy-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
