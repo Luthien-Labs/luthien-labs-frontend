@@ -30,10 +30,9 @@
 #luthenLabsName {
   width: 200px;
   font-size: 24px;
-  font-weight: bold;
   margin-left: 5px;
-  margin-bottom: 15px;
-  font-family: "NightmarePills", sans-serif; // Apply custom font
+  margin-bottom: 13px;
+  font-family: "Abordage", sans-serif;
 }
 
 #headerBarLinks {
@@ -41,4 +40,15 @@
   justify-content: space-between;
   width: 100%;
   margin-right: 50px;
+  font-family: "Abordage", sans-serif;
+  a {
+    color: #1c521f;
+    text-decoration: none;
+    padding: 0 10px;
+
+    &:hover {
+      color: #0f3d1a;
+      text-decoration: underline;
+    }
+  }
 }
