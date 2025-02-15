@@ -1,0 +1,42 @@
+@use "../../styles/variables" as *;
+@import "../../assets/fonts/fonts.css";
+
+#header-bar-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  margin-right: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #cd81ff4d;
+  font-family: "Abordage", sans-serif;
+  &:hover {
+    background-color: #cc81ff;
+    a {
+      color: #6100a4;
+    }
+  }
+}
+
+#header-bar-button-active {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  margin-right: 50px;
+  border-radius: 10px;
+  font-family: "Abordage", sans-serif;
+
+  background-color: #cc81ff;
+  a {
+    color: #6100a4;
+    cursor: default;
+  }
+}
+
+#header-bar-link {
+  color: #b242ff;
+  text-decoration: none;
+  padding: 0 10px;
+}

@@ -2,3 +2,8 @@
   font-family: "Abordage";
   src: url("/fonts/Abordage-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Dhyana";
+  src: url("/fonts/Dhyana-Regular.ttf") format("truetype");
+}

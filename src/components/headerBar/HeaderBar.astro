@@ -1,5 +1,6 @@
 ---
 import luthenLabsLogo from "../../assets/luthenLabsLogo.png";
+import HeaderBarButton from "../headerBarButton/HeaderBarButton.astro";
 import "./HeaderBarStyles.scss";
 ---
 
@@ -15,10 +16,10 @@ import "./HeaderBarStyles.scss";
       <h2 id="luthenLabsName">Luthen Labs</h2>
     </div>
     <div id="headerBarLinks">
-      <a href="#about">About Us</a>
-      <a href="#projects">Our People</a>
-      <a href="#blog">Dev Blog</a>
-      <a href="#contact">Contact Us</a>
+      <HeaderBarButton title="Home" active="true" />
+      <HeaderBarButton title="Our People" />
+      <HeaderBarButton title="Dev Blog" />
+      <HeaderBarButton title="Contact Us" />
     </div>
   </div>
 </div>
