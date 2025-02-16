@@ -1,0 +1,18 @@
+@use "../../../styles/variables" as *;
+@import "../../../assets/fonts/fonts.css";
+
+#content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+  width: 500px;
+  height: 500px;
+  max-width: 500px;
+  max-height: 500px;
+}
+
+#content-grid > * {
+  aspect-ratio: 1 / 1; // Ensure cells are square
+}

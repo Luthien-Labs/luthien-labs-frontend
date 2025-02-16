@@ -15,4 +15,7 @@
   justify-content: center;
   gap: 20px;
   width: 75%;
+  > * {
+    flex: 1;
+  }
 }

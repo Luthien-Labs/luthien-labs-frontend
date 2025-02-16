@@ -1,13 +1,39 @@
 ---
 import "./TopSectionStyles.scss";
 import CopyFrame from "src/components/common/copyFrame/CopyFrame.astro";
+import ContentGrid from "src/components/common/contentGrid/ContentGrid.astro";
 import TitleBar from "../titleBar/TitleBar.astro";
 ---
 
 <div id="top-section">
   <TitleBar />
   <div id="top-section-content">
-    <CopyFrame />
-    <CopyFrame />
+    <CopyFrame>
+      <p>
+        At Luthien Labs, we are at the forefront of pioneering advancements in
+        next-generation technological ecosystems.
+      </p>
+      <p>
+        Our multidisciplinary approach leverages cutting-edge paradigms such as
+        quantum-driven optimization, neural-synaptic frameworks, and
+        bio-convergent systems to redefine the boundaries of possibility.
+      </p>
+      <p>
+        By integrating scalable, adaptive solutions with proprietary algorithmic
+        architectures, we are not just solving today’s challenges—we are
+        architecting the foundation for tomorrow’s breakthroughs.
+      </p>
+    </CopyFrame>
+    <ContentGrid>
+      <CopyFrame><div>first item</div></CopyFrame>
+      <CopyFrame><div>93% of our parameters</div></CopyFrame>
+      <div></div>
+      <div></div>
+      <CopyFrame><div>Leading in 12 undefined metrics</div></CopyFrame>
+      <CopyFrame><div>sixth item</div></CopyFrame>
+      <CopyFrame> <div>seventh item</div></CopyFrame>
+      <CopyFrame><div>Ranked #1 in theoretical excellence</div></CopyFrame>
+      <div></div>
+    </ContentGrid>
   </div>
 </div>
