@@ -2,7 +2,12 @@
 @import "../../../assets/fonts/fonts.css";
 
 #grid-item-image {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 20px;
+  overflow: hidden;
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Zoom in and crop the image
+    object-position: center; // Center the image within the container
+    border-radius: 20px;
+  }
 }
