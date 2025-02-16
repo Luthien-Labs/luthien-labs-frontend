@@ -1,8 +1,7 @@
 ---
 import "./TopSectionStyles.scss";
-import CopyFrame from "src/components/common/copyFrame/CopyFrame.astro";
-import ContentGrid from "src/components/common/contentGrid/ContentGrid.astro";
-import TitleBar from "../titleBar/TitleBar.astro";
+import { CopyFrame, ImageFrame, ContentGrid } from "src/components/common";
+import TitleBar from "../titleBar";
 ---
 
 <div id="top-section">
@@ -25,13 +24,13 @@ import TitleBar from "../titleBar/TitleBar.astro";
       </p>
     </CopyFrame>
     <ContentGrid>
-      <CopyFrame><div>first item</div></CopyFrame>
+      <ImageFrame><div>first item</div></ImageFrame>
       <CopyFrame><div>93% of our parameters</div></CopyFrame>
       <div></div>
       <div></div>
       <CopyFrame><div>Leading in 12 undefined metrics</div></CopyFrame>
-      <CopyFrame><div>sixth item</div></CopyFrame>
-      <CopyFrame> <div>seventh item</div></CopyFrame>
+      <ImageFrame><div>sixth item</div></ImageFrame>
+      <ImageFrame> <div>seventh item</div></ImageFrame>
       <CopyFrame><div>Ranked #1 in theoretical excellence</div></CopyFrame>
       <div></div>
     </ContentGrid>
