@@ -1,13 +1,18 @@
 ---
 import "./TopSectionStyles.scss";
-import { CopyFrame, ImageFrame, ContentGrid } from "src/components/common";
+import {
+  CopyBlock,
+  GridItemCopy,
+  GridItemImage,
+  ContentGrid,
+} from "src/components/common";
 import TitleBar from "../titleBar";
 ---
 
 <div id="top-section">
   <TitleBar />
   <div id="top-section-content">
-    <CopyFrame>
+    <CopyBlock>
       <p>
         At Luthien Labs, we are at the forefront of pioneering advancements in
         next-generation technological ecosystems.
@@ -22,16 +27,17 @@ import TitleBar from "../titleBar";
         architectures, we are not just solving today’s challenges—we are
         architecting the foundation for tomorrow’s breakthroughs.
       </p>
-    </CopyFrame>
+    </CopyBlock>
     <ContentGrid>
-      <ImageFrame><div>first item</div></ImageFrame>
-      <CopyFrame><div>93% of our parameters</div></CopyFrame>
+      <GridItemImage><div>first item</div></GridItemImage>
+      <GridItemCopy><div>93% of our parameters</div></GridItemCopy>
       <div></div>
       <div></div>
-      <CopyFrame><div>Leading in 12 undefined metrics</div></CopyFrame>
-      <ImageFrame><div>sixth item</div></ImageFrame>
-      <ImageFrame> <div>seventh item</div></ImageFrame>
-      <CopyFrame><div>Ranked #1 in theoretical excellence</div></CopyFrame>
+      <GridItemCopy><div>Leading in 12 undefined metrics</div></GridItemCopy>
+      <GridItemImage><div>sixth item</div></GridItemImage>
+      <GridItemImage> <div>seventh item</div></GridItemImage>
+      <GridItemCopy><div>Ranked #1 in theoretical excellence</div></GridItemCopy
+      >
       <div></div>
     </ContentGrid>
   </div>
