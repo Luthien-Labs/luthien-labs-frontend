@@ -2,12 +2,14 @@
 import "./TopSectionStyles.scss";
 import CopyFrame from "src/components/common/copyFrame/CopyFrame.astro";
 import TitleBar from "../titleBar/TitleBar.astro";
+import ContentGrid from "../../common/contentGrid/ContentGrid.astro";
+import { gridConfig } from "./gridConfig";
 ---
 
 <div id="top-section">
   <TitleBar />
   <div id="top-section-content">
     <CopyFrame />
-    <CopyFrame />
+    <ContentGrid items={gridConfig} />
   </div>
 </div>

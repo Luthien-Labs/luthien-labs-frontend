@@ -1,0 +1,57 @@
+---
+import "./ContentGridStyles.scss";
+
+interface GridItem {
+    id: string;
+    type: "text" | "image" | "empty";
+    content?: string; // Made optional to support empty items
+    alt?: string; // For images
+    className?: string; // Optional custom styling
+}
+
+interface Props {
+    items: GridItem[];
+    className?: string;
+}
+
+const { items, className = "" } = Astro.props;
+
+// Ensure we have exactly 9 items for a 3x3 grid
+const gridItems = [...items];
+while (gridItems.length < 9) {
+    gridItems.push({
+        id: `empty-${gridItems.length}`,
+        type: "empty",
+    });
+}
+// Trim to exactly 9 items if more are provided
+gridItems.splice(9);
+---
+
+<div class={`content-grid ${className}`}>
+    {
+        gridItems.map((item) => {
+            const isEmpty =
+                item.type === "empty" ||
+                !item.content ||
+                item.content.trim() === "";
+            const itemClass = isEmpty
+                ? "grid-item grid-item-empty"
+                : `grid-item ${item.type === "image" ? "grid-item-image" : "grid-item-text"}`;
+
+            return (
+                <div class={`${itemClass} ${item.className || ""}`}>
+                    {!isEmpty && item.type === "image" ? (
+                        <img
+                            src={item.content}
+                            alt={item.alt || ""}
+                            class="grid-image"
+                        />
+                    ) : !isEmpty ? (
+                        <div class="grid-text">{item.content}</div>
+                    ) : null}
+                </div>
+            );
+        })
+    }
+</div>
