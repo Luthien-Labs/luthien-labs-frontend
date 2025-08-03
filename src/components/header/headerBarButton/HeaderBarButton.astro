@@ -5,8 +5,6 @@ const { title } = Astro.props;
 const { active } = Astro.props;
 ---
 
-<div id={active ? "header-bar-button-active" : "header-bar-button"}>
-  <div>
-    <a id="header-bar-link" href={`#${title}`}>{title}</a>
-  </div>
-</div>
+<li id={active ? "header-bar-link-active" : "header-bar-link"}>
+  <a href={`#${title}`}>{title}</a>
+</li>

@@ -1,38 +1,25 @@
 @use "../../../styles/variables" as *;
 @import "../../../assets/fonts/fonts.css";
 
-#header-bar-button {
+#header-bar-link {
   display: flex;
-  align-items: center;
-  width: 100%;
-  min-width: 120px;
-  height: 30px;
-  margin-top: 4px;
-  margin-right: 50px;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: #cd81ff4d;
-  font-family: "Abordage", sans-serif;
+  list-style: none;
+  padding: 0 10px;
+    font-family: "Abordage", sans-serif;
+        a {
+      color: #b242ff;
+       text-decoration: none;
+    }
   &:hover {
-    background-color: #cc81ff;
     a {
       color: #6100a4;
     }
   }
 }
 
-#header-bar-button-active {
-@extend #header-bar-button;
-
-  background-color: #cc81ff;
+#header-bar-link-active {
+  @extend #header-bar-link;
   a {
-    color: #6100a4;
-    cursor: default;
+    font-weight: bold; 
+}
   }
-}
-
-#header-bar-link {
-  color: #b242ff;
-  text-decoration: none;
-  padding: 0 10px;
-}

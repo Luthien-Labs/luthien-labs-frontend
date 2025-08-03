@@ -7,3 +7,13 @@
   font-family: "Dhyana";
   src: url("/fonts/Dhyana-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Grotesk";
+  src: url("/fonts/SpaceGrotesk-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/InterVariable.ttf") format("truetype");
+}
