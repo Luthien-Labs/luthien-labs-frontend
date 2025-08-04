@@ -8,3 +8,10 @@
   border-radius: 20px;
   font-size: larger;
 }
+
+@media (max-width: 875px) {
+  #copy-frame {
+    width: 90%;
+    padding: 1rem;
+  }
+}

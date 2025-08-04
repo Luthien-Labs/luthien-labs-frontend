@@ -11,7 +11,6 @@
   display: flex;
   align-items: center;
   margin-top: 50px;
-  min-width: 900px;
   border-radius: 10px;
   background-color: white;
   height: 55px;
@@ -27,7 +26,7 @@
 }
 
 #luthenLabsName {
-  width: 200px;
+  width: 160px;
   font-size: 24px;
   margin-left: 5px;
   margin-bottom: 20px;
@@ -44,7 +43,7 @@
   list-style: none;
   margin: 0;
   justify-content: space-between;
-  width: 70%;
+  width: 100%;
   padding: 0 20px;
 }
 #navBarLink {
@@ -56,7 +55,7 @@ text-decoration: none;
   gap: 10px;
 }
 
-@media (max-width: 35em) {
+@media (max-width: 49em) {
   #navBar {
 position: fixed;
 justify-content: space-between;
@@ -74,7 +73,10 @@ padding: min(10vh, 10rem) 2em;
   }
 
   #navBranding{
-
     display: none;
+  }
+
+  #container {
+    padding-top: 105px;
   }
 } 
