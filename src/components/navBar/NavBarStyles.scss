@@ -18,6 +18,8 @@
   box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.15);
 }
 
+
+
 #luthienLabsLogo {
   margin-left: 5px;
   margin-bottom: 1px;
@@ -73,6 +75,7 @@ backdrop-filter: blur(1rem);
 margin: 0;
 border-radius: 0;
 height: 100vh;
+
   }
   #navBarLinkList {
     flex-direction: column;
@@ -81,9 +84,22 @@ height: 100vh;
     flex-direction: column;
   }
 
+  #navBar[data-visible="false"] {
+  transform: translateX(100%);
+}
+
+  #navBar[data-visible="true"] {
+  transform: translateX(0);
+}
+
+  #navBar.transitioning {
+  transition: transform 0.3s ease-in-out;
+}
+
 #mobileMenuButton {
 display: block;
 position: absolute;
+cursor: pointer;
 z-index: 9999;
 background: url("../../assets/bars-solid-full.svg");
 background-repeat: no-repeat;

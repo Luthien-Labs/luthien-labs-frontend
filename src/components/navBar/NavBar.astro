@@ -3,12 +3,34 @@ import luthienLabsLogo from "../../assets/luthienLabsLogo.png";
 import "./NavBarStyles.scss";
 ---
 
+<script>
+  const mobileMenuButton = document.getElementById("mobileMenuButton");
+  const navBar = document.getElementById("navBar");
+
+  if (mobileMenuButton && navBar) {
+    mobileMenuButton.addEventListener("click", () => {
+      // Add transitioning class before changing state
+      navBar.classList.add("transitioning");
+
+      const isVisible = navBar.getAttribute("data-visible") === "true";
+      navBar.setAttribute("data-visible", (!isVisible).toString());
+      mobileMenuButton.setAttribute("aria-expanded", (!isVisible).toString());
+      mobileMenuButton.classList.toggle("active", !isVisible);
+
+      // Remove transitioning class after animation completes
+      setTimeout(() => {
+        navBar.classList.remove("transitioning");
+      }, 300);
+    });
+  }
+</script>
+
 <div id="container">
   <button
     id="mobileMenuButton"
     aria-expanded="false"
     aria-controls="navBarLinkContainer"></button>
-  <div id="navBar">
+  <div id="navBar" data-visible="false">
     <div id="navBranding">
       <img
         id="luthienLabsLogo"
