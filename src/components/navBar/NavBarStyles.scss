@@ -55,21 +55,43 @@ text-decoration: none;
   gap: 10px;
 }
 
+#mobileMenuButton {
+  display: none;
+}
+
 @media (max-width: 49em) {
   #navBar {
 position: fixed;
+z-index: 1000;
 justify-content: space-between;
 flex-direction: column;
 align-items: start;
 inset: 0 0 0 60%;
-background: steelblue;
 padding: min(10vh, 10rem) 2em;
+background: hsl(0 0% 100% / 0.6);
+backdrop-filter: blur(1rem);
+margin: 0;
+border-radius: 0;
+height: 100vh;
   }
   #navBarLinkList {
     flex-direction: column;
   }
     #navBarLinkContainer {
     flex-direction: column;
+  }
+
+#mobileMenuButton {
+display: block;
+position: absolute;
+z-index: 9999;
+background: url("../../assets/bars-solid-full.svg");
+background-repeat: no-repeat;
+border: 0;
+width: 2rem;
+aspect-ratio: 1;
+top: 2rem;
+right: 2rem;
   }
 
   #navBranding{
