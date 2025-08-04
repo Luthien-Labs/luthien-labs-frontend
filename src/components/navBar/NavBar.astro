@@ -1,0 +1,34 @@
+---
+import luthienLabsLogo from "../../assets/luthienLabsLogo.png";
+import "./NavBarStyles.scss";
+---
+
+<div id="container">
+  <div id="navBar">
+    <div id="navBranding">
+      <img
+        id="luthienLabsLogo"
+        src={luthienLabsLogo.src}
+        alt="Luthen Labs Logo"
+        fetchpriority="high"
+      />
+      <h2 id="luthenLabsName">Luthien Labs</h2>
+    </div>
+    <nav id="navBarLinkContainer">
+      <ul id="navBarLinkList">
+        <li id="">
+          <a href="/" id="navBarLink">Home</a>
+        </li>
+        <li>
+          <a href="/our-people" id="navBarLink">Our People</a>
+        </li>
+        <li>
+          <a href="/dev-blog" id="navBarLink">Dev Blog</a>
+        </li>
+        <li>
+          <a href="/contact-us" id="navBarLink">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

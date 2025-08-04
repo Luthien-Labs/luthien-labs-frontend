@@ -21,29 +21,26 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  }
 
   // Hide empty items
   &.grid-item-empty {
     background-color: transparent;
     box-shadow: none;
-    
-    &:hover {
-      transform: none;
-      box-shadow: none;
-    }
   }
 }
 
 .grid-text {
+    padding: 4px;
+  text-align: center;
+}
 
+.grid-item-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   object-fit: cover;
+  font-size: clamp(0.7rem, 1.7vw, 2rem);
 }
 
 .grid-image {

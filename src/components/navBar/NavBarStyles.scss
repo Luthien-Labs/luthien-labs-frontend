@@ -1,5 +1,5 @@
-@use "../../../styles/variables" as *;
-@import "../../../assets/fonts/fonts.css";
+@use "../../styles/variables" as *;
+@import "../../assets/fonts/fonts.css";
 
 #container {
   display: flex;
@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-#headerBar {
+#navBar {
   display: flex;
   align-items: center;
   margin-top: 50px;
@@ -34,17 +34,47 @@
   font-family: "Grotesk", sans-serif;
 }
 
-#headerBarLinkContainer {
+#navBarLinkContainer {
   display: flex;
   width: 100%;
   justify-content: end;
-
-
 }
-#headerBarLinks {
+#navBarLinkList {
   display: flex;
+  list-style: none;
+  margin: 0;
   justify-content: space-between;
   width: 70%;
   padding: 0 20px;
-
 }
+#navBarLink {
+text-decoration: none;
+}
+#navBranding {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 35em) {
+  #navBar {
+position: fixed;
+justify-content: space-between;
+flex-direction: column;
+align-items: start;
+inset: 0 0 0 60%;
+background: steelblue;
+padding: min(10vh, 10rem) 2em;
+  }
+  #navBarLinkList {
+    flex-direction: column;
+  }
+    #navBarLinkContainer {
+    flex-direction: column;
+  }
+
+  #navBranding{
+
+    display: none;
+  }
+} 

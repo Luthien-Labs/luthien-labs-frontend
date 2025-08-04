@@ -38,7 +38,7 @@ export const gridConfig2 = [
     content: "/src/assets/images/particle-imaging-lens.jpg",
     alt: "Particle imaging lens",
   },
-    { id: "2", type: "text" as const, content: "Polymorphic Archetectures" },
+    { id: "2", type: "text" as const, content: "Polymorphic Archetecture" },
   { id: "3", type: "empty" as const },
     { id: "4", type: "text" as const, content: "Entropy Mapping" },
       {
