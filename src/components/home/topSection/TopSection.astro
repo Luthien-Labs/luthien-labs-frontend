@@ -3,9 +3,8 @@ import "./TopSectionStyles.scss";
 import CopyFrame from "src/components/common/copyFrame/CopyFrame.astro";
 import TitleBar from "../titleBar/TitleBar.astro";
 import ContentGrid from "../../common/contentGrid/ContentGrid.astro";
-import { gridConfig1, gridConfig2 } from "./gridConfig";
+import { gridConfig1 } from "./gridConfig";
 import SectionOne from "src/components/common/copy/section-one.md";
-import SectionTwo from "src/components/common/copy/section-two.md";
 ---
 
 <div id="top-section">
@@ -13,9 +12,5 @@ import SectionTwo from "src/components/common/copy/section-two.md";
   <div id="top-section-content">
     <CopyFrame Content={SectionOne} />
     <ContentGrid items={gridConfig1} />
-  </div>
-  <div id="top-section-content">
-    <ContentGrid items={gridConfig2} />
-    <CopyFrame Content={SectionTwo} />
   </div>
 </div>

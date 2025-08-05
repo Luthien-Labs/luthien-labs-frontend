@@ -1,15 +1,20 @@
 @import "../../../assets/fonts/fonts.css";
 
-#top-section {
+#mid-backdrop {
+background: white;
+width: 100%;
+}
+
+
+#mid-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: 1rem;
 }
 
-#top-section-content {
+#mid-section-content {
   display: flex;
   flex-direction: row;
   align-items: center;

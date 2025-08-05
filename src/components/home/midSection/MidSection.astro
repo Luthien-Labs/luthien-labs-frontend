@@ -1,0 +1,16 @@
+---
+import "./MidSectionStyles.scss";
+import CopyFrame from "src/components/common/copyFrame/CopyFrame.astro";
+import ContentGrid from "../../common/contentGrid/ContentGrid.astro";
+import { gridConfig2 } from "./gridConfig";
+import SectionTwo from "src/components/common/copy/section-two.md";
+---
+
+<div id="mid-backdrop">
+  <div id="mid-section">
+    <div id="mid-section-content">
+      <ContentGrid items={gridConfig2} />
+      <CopyFrame Content={SectionTwo} />
+    </div>
+  </div>
+</div>

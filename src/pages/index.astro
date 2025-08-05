@@ -1,14 +1,17 @@
 ---
+import "../styles/global.scss";
 import Backdrop from "../components/common/backdrop/Backdrop.astro";
 import Layout from "../layouts/Layout.astro";
 import NavBar from "src/components/navBar/NavBar.astro";
 import TopSection from "src/components/home/topSection/TopSection.astro";
-
-import "../styles/global.scss";
+import MidSection from "src/components/home/midSection/MidSection.astro";
+import Testimonials from "src/components/home/testimonials/Testimonials.astro";
 ---
 
 <Layout>
   <Backdrop />
   <NavBar />
   <TopSection />
+  <MidSection />
+  <Testimonials />
 </Layout>
