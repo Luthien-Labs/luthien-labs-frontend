@@ -1,5 +1,7 @@
 ---
 import "./TestimonialStyles.scss";
+import neurosyncIcon from "../../../assets/icons/neurosync.svg?url";
+import rockwellIcon from "../../../assets/icons/rockwell.svg?url";
 ---
 
 <div id="testimonial-backdrop">
@@ -7,17 +9,27 @@ import "./TestimonialStyles.scss";
     <div id="testimonial-section-content">
       <h2>Trusted by Innovators</h2>
       <div class="testimonial">
+        <img src={neurosyncIcon} alt="Neurosync Icon" />
         <p>
-          "Luthien Labs transformed our business with their innovative
-          solutions!"
+          "Luthien Labs has fundamentally redefined our approach to systemic
+          engagement. Their methodological frameworks are nothing short of
+          revolutionary."
         </p>
-        <span>- Happy Client</span>
+        <span
+          >— Dr. Elena Rodriguez, Chief Innovations Officer, NeuroSync
+          Technologies</span
+        >
       </div>
       <div class="testimonial">
+        <img src={rockwellIcon} alt="Rockwell Icon" />
         <p>
-          "Their team is incredibly professional and dedicated to excellence."
+          "We've never encountered a more robust approach to probabilistic
+          potential mapping. Their insights were crucial in the development of
+          the Rockwell Retro Encabulator."
         </p>
-        <span>- Satisfied Customer</span>
+        <span
+          >— Marcus Chen, Director of Emerging Systems, Rockwell Automation</span
+        >
       </div>
     </div>
   </div>
