@@ -57,6 +57,10 @@ text-decoration: none;
   gap: 10px;
 }
 
+  #navBrandingUnder{
+display: none;
+  }
+
 #mobileMenuButton {
   display: none;
 }
@@ -109,9 +113,17 @@ aspect-ratio: 1;
 top: 2rem;
 right: 2rem;
   }
-
   #navBranding{
     display: none;
+  }
+  #navBrandingUnder{
+position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+top: 2.5rem;
+left: 12vw;
+z-index: 9999;
   }
 
   #container {
