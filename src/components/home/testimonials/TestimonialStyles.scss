@@ -11,14 +11,46 @@ width: 100%;
   align-items: center;
   justify-content: center;
   width: 100%;
+
+
+}
+
+#testimonial-section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+
+     h2 {
+
+
+  font-family: "Dhyana", sans-serif;
+
+  font-size: 2.5rem;
+  font-weight: lighter;
+    text-align: start;
+    margin: 0.5rem 0;
+    color: white;
+  }
 }
 
 #testimonial-section-content {
   display: flex;
+  font-family: "Crimson", serif;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  margin: 5rem;
+  gap: 3rem;
+  margin: 1rem;
   color: white;
+  width: 75%;
+}
+
+#testimonial {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }

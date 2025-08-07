@@ -17,3 +17,8 @@
   font-family: "Inter";
   src: url("/fonts/InterVariable.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Crimson";
+  src: url("/fonts/CrimsonPro-VariableFont_wght.ttf") format("truetype");
+}
