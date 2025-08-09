@@ -1,0 +1,37 @@
+---
+import "./FooterStyles.scss";
+import NavBranding from "../navBranding/NavBranding.astro";
+import mastadon from "../../../assets/icons/mastadon.svg?url";
+import bluesky from "../../../assets/icons/bluesky.svg?url";
+import insta from "../../../assets/icons/insta.svg?url";
+import youtube from "../../../assets/icons/youtube.svg?url";
+---
+
+<div id="footer-container">
+    <div id="social-bar">
+        <NavBranding />
+        <div id="social-links">
+            <img src={mastadon} alt="Mastodon Icon" />
+            <img src={bluesky} alt="Bluesky Icon" />
+            <img src={insta} alt="Instagram Icon" />
+            <img src={youtube} alt="YouTube Icon" />
+        </div>
+    </div>
+    <div id="footer-text">
+        <p>
+            © 2025 Luthien Labs™. All Rights Hyper-Reserved. Any unauthorized
+            transmission, reproduction, or digital replication of our
+            proprietary content, methodological frameworks, or conceptual
+            architectures—whether known or yet to be discovered—is strictly
+            prohibited and may result in quantum-level interdictive
+            consequences. The intellectual property contained herein represents
+            a non-linear, trans-dimensional continuum of potential that extends
+            beyond traditional legal frameworks. By accessing this digital
+            substrate, you implicitly acknowledge the meta-jurisdictional
+            sovereignty of our Synergistic Development Framework™. Luthien Labs
+            reserves all rights to redefine, recalibrate, or retroactively
+            modify the parameters of this statement with or without prior
+            notification.
+        </p>
+    </div>
+</div>
