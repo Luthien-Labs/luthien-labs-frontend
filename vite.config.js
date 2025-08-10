@@ -1,10 +1,8 @@
-export default {
+import { defineConfig } from 'vite';
+
+export default defineConfig({
   server: {
     host: '0.0.0.0',
-    allowedHosts: ['local.luthien-labs.net', 'luthien-labs.net'],
+    allowedHosts: 'all',
   },
-  preview: {
-    host: '0.0.0.0',
-    allowedHosts: ['local.luthien-labs.net', 'luthien-labs.net'],
-  },
-};
+});

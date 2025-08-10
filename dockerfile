@@ -1,5 +1,5 @@
-# Use the official Node.js image as the base image
-FROM node:19
+# Use multi-stage build for production
+FROM node:22-alpine AS builder
 
 # Set the working directory in the container to /app
 WORKDIR /app
@@ -16,8 +16,17 @@ COPY . .
 # Build the Astro project
 RUN npm run build
 
-# Expose port for the application
-EXPOSE 3002
+# Production stage with Nginx
+FROM nginx:alpine
 
-# Start the application
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "3002"]
+# Copy the built files to Nginx
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy custom Nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
