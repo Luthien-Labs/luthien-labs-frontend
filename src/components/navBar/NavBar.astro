@@ -22,6 +22,25 @@ import NavBranding from "../common/navBranding/NavBranding.astro";
         navBar.classList.remove("transitioning");
       }, 300);
     });
+
+    // Close navBar if clicking anywhere except mobileMenuButton
+    document.addEventListener("click", (event) => {
+      if (
+        navBar.getAttribute("data-visible") === "true" &&
+        event.target !== mobileMenuButton &&
+        !mobileMenuButton.contains(event.target as Node)
+      ) {
+        // Add transitioning class before changing state
+        navBar.classList.add("transitioning");
+        navBar.setAttribute("data-visible", "false");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+        mobileMenuButton.classList.remove("active");
+        // Remove transitioning class after animation completes
+        setTimeout(() => {
+          navBar.classList.remove("transitioning");
+        }, 300);
+      }
+    });
   }
 </script>
 <div id="navBrandingUnder">
