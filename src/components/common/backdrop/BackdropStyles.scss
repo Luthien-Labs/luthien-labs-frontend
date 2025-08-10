@@ -1,12 +1,16 @@
-
 #backdrop {
-  --base-color: #b7d3d1;
-  --gradient1-start: #5da28e;
-  --gradient2-start: #d0dbda;
-  --gradient2-end: #ffffff;
+  --base-color: rgb(183, 211, 239);
+  --gradient1-start: rgb(93, 162, 192);
+  --gradient2-start: rgb(208, 219, 248);
+  --gradient2-end: rgb(255, 255, 255);
   --gradient2-opacity: 0.8;
   --circle1-scale: 1;
   --circle2-scale: 1;
+  --line-color: rgb(93, 162, 192);
+  --curve-offset-x: 20;
+  --straight-scale: 2;
+  --straight-offset-x: -1000;
+  --straight-offset-y: 0;
 
   position: fixed;
   inset: 0;
@@ -14,17 +18,46 @@
   pointer-events: none;
 
   .background-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-#backgroundLines {
-  position: absolute;
-  inset: 0;
-  object-fit: stretch;
- width: 100%;
-}
-}
+  #backgroundLines {
+    position: absolute;
+    inset: 0;
+    object-fit: stretch;
+    width: 100%;
+  }
 
+  #curved-lines {
+    transform: translate(
+        calc(var(--curve-offset-x, 0) * 1px),
+        calc(var(--curve-offset-y, 0) * 1px)
+      )
+      scale(var(--curve-scale, 1));
+  }
+
+  #straight-lines {
+    transform: translate(
+        calc(var(--straight-offset-x, 0) * 1px),
+        calc(var(--straight-offset-y, 0) * 1px)
+      )
+      scale(var(--straight-scale, 1));
+  }
+
+  .curved-line {
+    fill: none;
+    stroke: var(--line-color, rgb(93, 162, 192));
+    stroke-width: var(--line-width, 1);
+    stroke-opacity: var(--line-opacity, 1);
+  }
+
+  .straight-line {
+    fill: none;
+    stroke: var(--line-color, rgb(93, 162, 192));
+    stroke-width: var(--straight-width, 1);
+    stroke-opacity: var(--line-opacity, 1);
+  }
+}
