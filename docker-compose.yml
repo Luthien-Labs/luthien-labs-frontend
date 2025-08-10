@@ -4,7 +4,5 @@ services:
   app:
     build: .
     ports:
-      - "3002:3002"
-    environment:
-      - PORT=3002
+      - "3002:80"
     restart: always
