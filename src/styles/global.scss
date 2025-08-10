@@ -15,15 +15,3 @@ body {
   z-index: -1;
   filter: blur(10px);
 }
-#backgroundLines {
-  position: fixed;
-  top: -10px;
-  left: -10px;
-  width: 110%;
-  height: 110%;
-  z-index: -1;
-
-  @media (max-width: 1200px) {
-    width: 1200px; // Set a minimum width for smaller viewports
-  }
-}
