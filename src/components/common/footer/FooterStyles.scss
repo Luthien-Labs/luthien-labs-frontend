@@ -43,3 +43,9 @@
         width: 75%;
   max-width: 60rem;
 }
+
+@media (max-width: 49em) {
+  #social-bar {
+    flex-direction: column;
+  }
+}
