@@ -3,7 +3,7 @@ export const gridConfig1 = [
   {
     id: "1",
     type: "image" as const,
-    content: "/src/assets/images/wavelength-control-adjustment.jpg",
+    content: "/images/wavelength-control-adjustment.jpg",
     alt: "Wavelength control adjustment",
   },
   { id: "2", type: "text" as const, content: "Quantum Research" },
@@ -17,14 +17,14 @@ export const gridConfig1 = [
   {
     id: "6",
     type: "image" as const,
-    content: "/src/assets/images/hypoxium-resonance-dynamo.jpg",
+    content: "/images/hypoxium-resonance-dynamo.jpg",
     alt: "Hypoxium resonance dynamo",
   },
 
   {
     id: "7",
     type: "image" as const,
-    content: "/src/assets/images/matt-with-szienoscope.jpg",
+    content: "/images/matt-with-szienoscope.jpg",
     alt: "Matt with Szienoscope",
   },
     { id: "8", type: "text" as const, content: "Bio-Convergent Systems" },

@@ -20,6 +20,7 @@
           deno
           vscode-extensions.denoland.vscode-deno
           zsh
+          docker
         ];
 
         shellHook = ''
