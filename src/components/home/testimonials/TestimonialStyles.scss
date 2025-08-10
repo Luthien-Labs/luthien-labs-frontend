@@ -1,3 +1,4 @@
+@use "../../../styles/variables" as *;
 @import "../../../assets/fonts/fonts.css";
 
 #testimonial-backdrop {
@@ -43,7 +44,8 @@ width: 100%;
   gap: 3rem;
   margin: 1rem;
   color: white;
-  width: 75%;
+  width: $page-width;
+  max-width: $page-max-width;
 }
 
 #testimonial {

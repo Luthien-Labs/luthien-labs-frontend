@@ -1,3 +1,4 @@
+@use "../../../styles/variables" as *;
 @import "../../../assets/fonts/fonts.css";
 
 #top-section {
@@ -15,6 +16,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  width: 75%;
+  width: $page-width;
+  max-width: $page-max-width;
   margin-bottom: 1rem;
 }

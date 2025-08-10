@@ -1,3 +1,4 @@
+@use "../../../styles/variables" as *;
 @import "../../../assets/fonts/fonts.css";
 
 #mid-backdrop {
@@ -20,6 +21,7 @@ width: 100%;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  width: 75%;
+  width: $page-width;
+  max-width: $page-max-width;
   margin: 1rem 0;
 }

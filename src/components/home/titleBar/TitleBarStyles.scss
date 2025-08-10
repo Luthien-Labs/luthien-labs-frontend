@@ -1,3 +1,4 @@
+@use "../../../styles/variables" as *;
 @import "../../../assets/fonts/fonts.css";
 
 #title-bar {
@@ -5,10 +6,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+    
 }
 
 #title {
-  width: 74%;
+  width: $page-width;
+  max-width: $page-max-width;
   font-family: "Dhyana", sans-serif;
   color: black;
   font-size: clamp(2em, 5vw, 3em);
