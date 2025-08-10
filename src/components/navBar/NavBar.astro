@@ -1,5 +1,4 @@
 ---
-import luthienLabsLogo from "../../assets/luthienLabsLogo.png";
 import "./NavBarStyles.scss";
 import NavBranding from "../common/navBranding/NavBranding.astro";
 ---
@@ -26,13 +25,7 @@ import NavBranding from "../common/navBranding/NavBranding.astro";
   }
 </script>
 <div id="navBrandingUnder">
-  <img
-    id="luthienLabsLogo"
-    src={luthienLabsLogo.src}
-    alt="Luthen Labs Logo"
-    fetchpriority="high"
-  />
-  <h2 id="luthenLabsName">Luthien Labs</h2>
+  <NavBranding />
 </div>
 <div id="container">
   <button
@@ -40,7 +33,9 @@ import NavBranding from "../common/navBranding/NavBranding.astro";
     aria-expanded="false"
     aria-controls="navBarLinkContainer"></button>
   <div id="navBar" data-visible="false">
-    <NavBranding />
+    <div id="navBrandingOver">
+      <NavBranding />
+    </div>
 
     <nav id="navBarLinkContainer">
       <ul id="navBarLinkList">
