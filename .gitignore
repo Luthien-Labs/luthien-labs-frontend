@@ -1,6 +1,9 @@
 # vscode settings
 .vscode/
 
+# local build output
+# dist/
+
 # generated types
 .astro/
 
