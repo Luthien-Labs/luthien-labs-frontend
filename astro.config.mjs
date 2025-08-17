@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 
 export default defineConfig({
   site: "https://www.luthien-labs.net",
-  base: "/",
+  base: "/dist",
   output: "static",
   server: {
     host: "0.0.0.0",
