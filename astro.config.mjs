@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://luthien-labs.github.io/luthien-labs-frontend",
+  site: "https://www.luthien-labs.net",
   base: "/luthien-labs-frontend",
   output: "static",
   server: {
