@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import staticAdapter from "@astrojs/adapter-static";
 
 export default defineConfig({
   site: "https://www.luthien-labs.net",
