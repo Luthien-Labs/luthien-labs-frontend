@@ -2,7 +2,7 @@
 .vscode/
 
 # local build output
-# dist/
+dist/
 
 # generated types
 .astro/
