@@ -4,7 +4,7 @@ export const gridConfig2 = [
   {
     id: "1",
     type: "image" as const,
-    content: "/images/particle-imaging-lens.jpg",
+    content: "/images/particle-imaging-lens.jpg?url",
     alt: "Particle imaging lens",
   },
     { id: "2", type: "text" as const, content: "Polymorphic Architecture" },
