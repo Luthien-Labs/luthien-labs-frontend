@@ -4,7 +4,7 @@ export const gridConfig2 = [
   {
     id: "1",
     type: "image" as const,
-    content: "/luthien-labs-frontend/images/particle-imaging-lens.jpg",
+    content: "/images/particle-imaging-lens.jpg",
     alt: "Particle imaging lens",
   },
     { id: "2", type: "text" as const, content: "Polymorphic Architecture" },
@@ -13,7 +13,7 @@ export const gridConfig2 = [
       {
     id: "5",
     type: "image" as const,
-    content: "/luthien-labs-frontend/images/shunt-tube-sensor.jpg",
+    content: "/images/shunt-tube-sensor.jpg",
     alt: "Shunt tube sensor",
   },
   { id: "6", type: "text" as const, content: "Meta-Systemic Frameworks" },
@@ -27,7 +27,7 @@ export const gridConfig2 = [
   {
     id: "9",
     type: "image" as const,
-    content: "/luthien-labs-frontend/images/clean-room-monitor.jpg",
+    content: "/images/clean-room-monitor.jpg",
     alt: "Clean room monitoring system",
   },
 
