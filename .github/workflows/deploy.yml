@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -6,43 +6,25 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: self-hosted
-
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4  # Updated to latest version
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3  # Updated to latest version
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-    - name: Build and deploy with Docker Compose
-      run: |
-        # Stop any existing containers for this project only
-        docker-compose down || true
-        
-        # Remove old containers and unused images to prevent disk space issues
-        docker-compose rm -f || true
-        docker image prune -f --filter "label=com.docker.compose.project=luthien-labs-frontend" || true
-        
-        # Build and start the new containers
-        docker-compose -f docker-compose.yml build --no-cache
-        docker-compose -f docker-compose.yml up -d
-        
-        # Wait for the service to be ready
-        sleep 10
-        
-        # Verify deployment
-        if ! docker-compose ps | grep -q "Up"; then
-          echo "Deployment failed - container not running"
-          docker-compose logs
-          exit 1
-        fi
-        
-        # Optional: Test if the service is responding
-        curl -f http://localhost:3002 || echo "Warning: Service may not be responding yet"
-    
-    - name: Clean up old Docker images
-      run: |
-        # Remove dangling images to save disk space
-        docker image prune -f
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
