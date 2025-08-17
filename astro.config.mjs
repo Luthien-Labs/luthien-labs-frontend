@@ -4,7 +4,6 @@ export default defineConfig({
   site: "https://www.luthien-labs.net",
   base: "/",
   output: "static",
-  adapter: "static",
   server: {
     host: "0.0.0.0",
   },
