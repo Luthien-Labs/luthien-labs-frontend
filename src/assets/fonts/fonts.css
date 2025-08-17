@@ -1,24 +1,26 @@
 @font-face {
   font-family: "Abordage";
-  src: url("/fonts/Abordage-Regular.ttf") format("truetype");
+  src: url(/luthien-labs-frontend/fonts/Abordage-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Dhyana";
-  src: url("/fonts/Dhyana-Regular.ttf") format("truetype");
+  src: url("/luthien-labs-frontend/fonts/Dhyana-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Grotesk";
-  src: url("/fonts/SpaceGrotesk-VariableFont_wght.ttf") format("truetype");
+  src: url("/luthien-labs-frontend/fonts/SpaceGrotesk-VariableFont_wght.ttf")
+    format("truetype");
 }
 
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/InterVariable.ttf") format("truetype");
+  src: url("/luthien-labs-frontend/fonts/InterVariable.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Crimson";
-  src: url("/fonts/CrimsonPro-VariableFont_wght.ttf") format("truetype");
+  src: url("/luthien-labs-frontend/fonts/CrimsonPro-VariableFont_wght.ttf")
+    format("truetype");
 }
