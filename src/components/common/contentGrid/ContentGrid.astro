@@ -2,16 +2,22 @@
 import "./ContentGridStyles.scss";
 
 interface GridItem {
-    id: string;
-    type: "text" | "image" | "empty";
-    content?: string; // Made optional to support empty items
-    alt?: string; // For images
-    className?: string; // Optional custom styling
+  id: string;
+  type: "text" | "image" | "empty";
+  content?: string; // Made optional to support empty items
+  alt?: string; // For images
+  className?: string; // Optional custom styling
+  style?: Record<string, string>; // Optional inline styles for text
+  styledContent?: Array<{
+    text?: string;
+    type?: "text" | "lineBreak";
+    style?: Record<string, string>;
+  }>; // Structured styled text with line breaks
 }
 
 interface Props {
-    items: GridItem[];
-    className?: string;
+  items: GridItem[];
+  className?: string;
 }
 
 const { items, className = "" } = Astro.props;
@@ -19,39 +25,46 @@ const { items, className = "" } = Astro.props;
 // Ensure we have exactly 9 items for a 3x3 grid
 const gridItems = [...items];
 while (gridItems.length < 9) {
-    gridItems.push({
-        id: `empty-${gridItems.length}`,
-        type: "empty",
-    });
+  gridItems.push({
+    id: `empty-${gridItems.length}`,
+    type: "empty",
+  });
 }
 // Trim to exactly 9 items if more are provided
 gridItems.splice(9);
 ---
 
 <div class={`content-grid ${className}`}>
-    {
-        gridItems.map((item) => {
-            const isEmpty =
-                item.type === "empty" ||
-                !item.content ||
-                item.content.trim() === "";
-            const itemClass = isEmpty
-                ? "grid-item grid-item-empty"
-                : `grid-item ${item.type === "image" ? "grid-item-image" : "grid-item-text"}`;
+  {
+    gridItems.map((item) => {
+      const isEmpty =
+        item.type === "empty" || (!item.content && !item.styledContent);
+      const itemClass = isEmpty
+        ? "grid-item grid-item-empty"
+        : `grid-item ${item.type === "image" ? "grid-item-image" : "grid-item-text"}`;
 
-            return (
-                <div class={`${itemClass} ${item.className || ""}`}>
-                    {!isEmpty && item.type === "image" ? (
-                        <img
-                            src={item.content}
-                            alt={item.alt || ""}
-                            class="grid-image"
-                        />
-                    ) : !isEmpty ? (
-                        <div class="grid-text">{item.content}</div>
-                    ) : null}
-                </div>
-            );
-        })
-    }
+      return (
+        <div
+          class={`${itemClass} ${item.className || ""}`}
+          style={item.style || {}}
+        >
+          {!isEmpty && item.type === "image" ? (
+            <img src={item.content} alt={item.alt || ""} class="grid-image" />
+          ) : !isEmpty && item.styledContent ? (
+            <div class="grid-text">
+              {item.styledContent.map((part) =>
+                part.type === "lineBreak" ? (
+                  <br />
+                ) : (
+                  <span style={part.style || {}}>{part.text}</span>
+                )
+              )}
+            </div>
+          ) : !isEmpty ? (
+            <div class="grid-text">{item.content}</div>
+          ) : null}
+        </div>
+      );
+    })
+  }
 </div>
