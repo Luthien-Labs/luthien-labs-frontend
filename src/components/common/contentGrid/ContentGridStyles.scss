@@ -31,16 +31,17 @@
 }
 
 .grid-text {
-    padding: 4px;
+  padding: 4px;
   text-align: center;
 }
 
 .grid-item-text {
+  font-family: "Inter", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   object-fit: cover;
-  font-size: clamp(0.7rem, 1.7vw, 2rem);
+  font-size: clamp(0.7rem, 1.7vw, 1.9rem);
 }
 
 .grid-image {
