@@ -26,6 +26,17 @@
         shellHook = ''
           echo "Development environment ready!"
           export PATH=$PATH:$HOME/.local/bin
+
+          # Dynamically set the Deno path in VS Code settings
+          DENO_PATH=$(which deno)
+          mkdir -p .vscode
+          cat > .vscode/settings.json <<EOF
+          {
+            "deno.enable": true,
+            "deno.path": "$DENO_PATH"
+          }
+          EOF
+
           exec zsh
         '';
       };
