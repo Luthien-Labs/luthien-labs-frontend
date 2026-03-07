@@ -1,5 +1,7 @@
-# vscode settings
+# editor settings
 .vscode/
+.zed/
+.editorconfig
 
 # local build output
 dist/
@@ -25,3 +27,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# AI Assistant Rules
+AGENTS.md

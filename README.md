@@ -2,7 +2,8 @@
 
 ## What is this
 
-This is the front end for the Luthien Labs website. It uses Deno and Astro. It also includes a Nix flake to set up the dev environment.
+This is the front end for the Luthien Labs website. It uses Deno and Astro.
+It also includes a Nix flake to set up the dev environment.
 
 The content is satirical and not meant to be taken for any more than that.
 
