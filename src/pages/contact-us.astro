@@ -1,0 +1,32 @@
+---
+import "../styles/global.scss";
+import Backdrop from "../components/common/backdrop/Backdrop.astro";
+import Layout from "../layouts/Layout.astro";
+import NavBar from "src/components/navBar/NavBar.astro";
+import Footer from "src/components/common/footer/Footer.astro";
+import ContactForm from "src/components/contact/ContactForm.astro";
+---
+
+<Layout>
+  <Backdrop />
+  <div class="page-wrapper">
+    <NavBar />
+    <ContactForm />
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  @media (min-width: 49.01em) {
+    .page-wrapper {
+      height: 100vh;
+      overflow: hidden;
+    }
+  }
+</style>
