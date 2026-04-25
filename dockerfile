@@ -4,6 +4,12 @@ FROM node:22-alpine AS builder
 # Set the working directory in the container to /app
 WORKDIR /app
 
+# Declare build-time env vars so Vite can inline them into the static output
+ARG PUBLIC_API_URL
+ARG PUBLIC_API_KEY
+ENV PUBLIC_API_URL=$PUBLIC_API_URL
+ENV PUBLIC_API_KEY=$PUBLIC_API_KEY
+
 # Copy dependency files first
 COPY package.json package-lock.json* ./
 
