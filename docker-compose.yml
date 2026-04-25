@@ -2,7 +2,11 @@ name: luthien-labs-frontend
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        PUBLIC_API_URL: ${PUBLIC_API_URL}
+        PUBLIC_API_KEY: ${PUBLIC_API_KEY}
     ports:
       - "3002:80"
     restart: always
