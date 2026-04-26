@@ -334,6 +334,35 @@ $bubble-size: 56px;
   animation: tl-fade 320ms ease;
 }
 
+@media (min-width: 49.01em) and (max-width: 56.25em) {
+  .tl-tick {
+    display: none;
+  }
+
+  .tl-year {
+    display: none;
+  }
+
+  .tl-bubble {
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Even spacing overrides proportional inline positions
+  #tl-rail button:nth-of-type(1) { left: 6% !important; }
+  #tl-rail button:nth-of-type(2) { left: 20.67% !important; }
+  #tl-rail button:nth-of-type(3) { left: 35.33% !important; }
+  #tl-rail button:nth-of-type(4) { left: 50% !important; }
+  #tl-rail button:nth-of-type(5) { left: 64.67% !important; }
+  #tl-rail button:nth-of-type(6) { left: 79.33% !important; }
+  #tl-rail button:nth-of-type(7) { left: 94% !important; }
+}
+
 @media (max-width: 49em) {
   #tl-content {
     width: 90%;
@@ -341,9 +370,11 @@ $bubble-size: 56px;
   }
 
   #tl-rail {
-    overflow-x: auto;
-    overflow-y: visible;
-    min-width: 600px;
+    display: none;
+  }
+
+  #tl-scrub {
+    justify-content: center;
   }
 
   #tl-card {
