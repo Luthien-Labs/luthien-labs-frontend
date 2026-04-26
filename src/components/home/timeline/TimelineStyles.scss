@@ -344,6 +344,10 @@ $bubble-size: 56px;
     display: none;
   }
 
+  #tl-scrub {
+    justify-content: center;
+  }
+
   #tl-card {
     grid-template-columns: 1fr;
     gap: 1rem;
