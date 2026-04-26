@@ -130,7 +130,6 @@ const first = MILESTONES[0];
       {MILESTONES.map((m, i) => (
         <button
           class="tl-milestone"
-          data-index={String(i)}
           data-above={i % 2 === 0 ? "true" : "false"}
           data-year={m.year}
           data-title={m.title}
@@ -142,20 +141,16 @@ const first = MILESTONES[0];
           <div class="tl-node" />
           <div class="tl-year">{m.year}</div>
           <div class="tl-branch">
-            <div class="tl-bubble">
-              <span set:html={iconSvg(m.icon)} />
-            </div>
+            <div class="tl-bubble" set:html={iconSvg(m.icon)} />
             <div class="tl-connector" />
           </div>
         </button>
       ))}
     </div>
 
-    <div id="tl-footer">
-      <div id="tl-scrub">
-        <button id="tl-prev" class="tl-scrub-btn" disabled>&#8592; Previous</button>
-        <button id="tl-next" class="tl-scrub-btn">Next &#8594;</button>
-      </div>
+    <div id="tl-scrub">
+      <button id="tl-prev" class="tl-scrub-btn" disabled>&#8592; Previous</button>
+      <button id="tl-next" class="tl-scrub-btn">Next &#8594;</button>
     </div>
 
     <div id="tl-card">
@@ -170,64 +165,12 @@ const first = MILESTONES[0];
 </section>
 
 <script>
-  const MILESTONES_DATA = [
-    {
-      year: "1942",
-      title: "Pre-Foundational Ideation",
-      sub: "First epistolary correspondence on probabilistic potential",
-      detail:
-        "A pseudonymous exchange of seventeen letters between three independent theorists laid the speculative groundwork that would, three decades later, formalize into the founding axioms of the firm.",
-    },
-    {
-      year: "1961",
-      title: "Convergence of Disparate Theorems",
-      sub: "Initial multi-disciplinary symposium convened in Geneva",
-      detail:
-        "Forty-two participants from eleven adjacent fields gathered for nine days of structured deliberation, producing the proceedings that would be cited in every subsequent Luthien white paper.",
-    },
-    {
-      year: "1972",
-      title: "Foundational Paradigm Establishment",
-      sub: "Inaugural quantum-potential framework conceptualized",
-      detail:
-        "Three founding theorists convened in a converted observatory to draft the first axioms of probabilistic potential mapping. The original notebook still resides in the Luthien archive.",
-    },
-    {
-      year: "1985",
-      title: "First Systemic Resonance Breakthrough",
-      sub: "Revolutionary meta-algorithmic interface developed",
-      detail:
-        "The inaugural meta-algorithmic interface achieved sustained resonance across seventeen previously incommensurable systems — a result independently replicated within the decade.",
-    },
-    {
-      year: "1997",
-      title: "Quantum Potential Recalibration",
-      sub: "Proprietary Synergistic Development Framework™ initiated",
-      detail:
-        "Recalibration of the firm’s core quantum-potential model produced the Synergistic Development Framework™, which has since underpinned every Luthien engagement.",
-    },
-    {
-      year: "2012",
-      title: "Emergent Systems Convergence",
-      sub: "Breakthrough in non-linear cognitive mapping achieved",
-      detail:
-        "A multi-year collaboration with three research institutes resolved the longstanding non-linearity problem in cognitive mapping, opening the field to commercial application.",
-    },
-    {
-      year: "2023",
-      title: "Global Paradigm Expansion",
-      sub: "Comprehensive meta-systemic framework globalized",
-      detail:
-        "The framework was open-sourced under the Luthien Reciprocal License and is now in active deployment across thirty-two jurisdictions.",
-    },
-  ];
-
   let active = 0;
   let hovered = -1;
 
-  const milestones = Array.from(document.querySelectorAll(".tl-milestone"));
-  const prevBtn = document.getElementById("tl-prev");
-  const nextBtn = document.getElementById("tl-next");
+  const milestones = document.querySelectorAll(".tl-milestone");
+  const prevBtn = document.getElementById("tl-prev") as HTMLButtonElement | null;
+  const nextBtn = document.getElementById("tl-next") as HTMLButtonElement | null;
   const cardYear = document.getElementById("tl-card-year");
   const cardBody = document.getElementById("tl-card-body");
   const cardSub = document.getElementById("tl-card-sub");
@@ -240,50 +183,38 @@ const first = MILESTONES[0];
       el.classList.toggle("is-active", i === active);
       el.classList.toggle("is-focused", i === focused);
     });
-    if (prevBtn) (prevBtn as HTMLButtonElement).disabled = active === 0;
-    if (nextBtn)
-      (nextBtn as HTMLButtonElement).disabled =
-        active === MILESTONES_DATA.length - 1;
+    if (prevBtn) prevBtn.disabled = active === 0;
+    if (nextBtn) nextBtn.disabled = active === milestones.length - 1;
   }
 
   function animateCard() {
     if (!cardYear || !cardBody) return;
     cardYear.classList.remove("tl-card-animate");
     cardBody.classList.remove("tl-card-animate");
-    void (cardYear as HTMLElement).offsetWidth;
+    void cardYear.offsetWidth;
     cardYear.classList.add("tl-card-animate");
     cardBody.classList.add("tl-card-animate");
   }
 
   function setActive(index: number) {
     active = index;
-    const m = MILESTONES_DATA[active];
-    if (cardYear) cardYear.textContent = m.year;
-    if (cardSub) cardSub.textContent = `Milestone — ${m.sub}`;
-    if (cardTitle) cardTitle.textContent = m.title;
-    if (cardDetail) cardDetail.textContent = m.detail;
+    const { year, title, sub, detail } = (milestones[active] as HTMLElement).dataset;
+    if (cardYear) cardYear.textContent = year ?? "";
+    if (cardSub) cardSub.textContent = `Milestone — ${sub ?? ""}`;
+    if (cardTitle) cardTitle.textContent = title ?? "";
+    if (cardDetail) cardDetail.textContent = detail ?? "";
     animateCard();
     updateStates();
   }
 
   milestones.forEach((el, i) => {
     el.addEventListener("click", () => setActive(i));
-    el.addEventListener("mouseenter", () => {
-      hovered = i;
-      updateStates();
-    });
-    el.addEventListener("mouseleave", () => {
-      hovered = -1;
-      updateStates();
-    });
+    el.addEventListener("mouseenter", () => { hovered = i; updateStates(); });
+    el.addEventListener("mouseleave", () => { hovered = -1; updateStates(); });
   });
 
-  prevBtn?.addEventListener("click", () => {
-    if (active > 0) setActive(active - 1);
-  });
-  nextBtn?.addEventListener("click", () => {
-    if (active < MILESTONES_DATA.length - 1) setActive(active + 1);
-  });
+  prevBtn?.addEventListener("click", () => { if (active > 0) setActive(active - 1); });
+  nextBtn?.addEventListener("click", () => { if (active < milestones.length - 1) setActive(active + 1); });
 
   updateStates();
 </script>

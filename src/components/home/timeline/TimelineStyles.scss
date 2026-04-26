@@ -2,7 +2,7 @@
 @import "../../../assets/fonts/fonts.css";
 
 $plum: rgb(142, 93, 162);
-$plum-border: rgba(142, 93, 162, 0.2);
+$plum-border: rgba($plum, 0.2);
 $paper-warm: #f0eeea;
 
 $rail-top: 180px;
@@ -67,7 +67,7 @@ $bubble-size: 56px;
     $plum 96%,
     transparent 100%
   );
-  box-shadow: 0 2px 12px rgba(142, 93, 162, 0.2);
+  box-shadow: 0 2px 12px rgba($plum, 0.2);
 }
 
 .tl-tick {
@@ -102,12 +102,12 @@ $bubble-size: 56px;
   border: none;
   padding: 0;
 
-  &:focus-visible .tl-node {
-    box-shadow: 0 0 0 4px rgba(142, 93, 162, 0.35);
-  }
-
   &:focus-visible {
     outline: none;
+
+    .tl-node {
+      box-shadow: 0 0 0 4px rgba($plum, 0.35);
+    }
   }
 }
 
@@ -171,16 +171,6 @@ $bubble-size: 56px;
     color 220ms ease;
   pointer-events: auto;
   cursor: pointer;
-
-  span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  svg {
-    transition: filter 220ms ease;
-  }
 }
 
 .tl-connector {
@@ -226,7 +216,7 @@ $bubble-size: 56px;
 
 .tl-milestone.is-focused {
   .tl-node {
-    box-shadow: 0 0 0 6px rgba(142, 93, 162, 0.12);
+    box-shadow: 0 0 0 6px rgba($plum, 0.12);
   }
 
   .tl-year {
@@ -236,23 +226,19 @@ $bubble-size: 56px;
   .tl-bubble {
     background: $plum;
     transform: scale(1.06);
-    box-shadow: 0 8px 24px rgba(142, 93, 162, 0.2);
+    box-shadow: 0 8px 24px rgba($plum, 0.2);
     color: white;
   }
 }
 
-#tl-footer {
+#tl-scrub {
   margin-top: 3rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 0.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid $plum-border;
-}
-
-#tl-scrub {
-  display: flex;
-  gap: 0.5rem;
 }
 
 .tl-scrub-btn {
