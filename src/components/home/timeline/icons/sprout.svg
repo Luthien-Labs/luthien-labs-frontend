@@ -1,0 +1,6 @@
+<svg width="28" height="28" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 26V14"/>
+  <path d="M15 14c0-4-3-7-7-7 0 4 3 7 7 7Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M15 14c0-3.5 3-6 6-6 0 3.5-3 6-6 6Z" fill="currentColor" fill-opacity="0.12"/>
+  <path d="M11 26h8"/>
+</svg>
