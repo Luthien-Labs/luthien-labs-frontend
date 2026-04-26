@@ -341,9 +341,7 @@ $bubble-size: 56px;
   }
 
   #tl-rail {
-    overflow-x: auto;
-    overflow-y: visible;
-    min-width: 600px;
+    display: none;
   }
 
   #tl-card {
