@@ -1,7 +1,289 @@
 ---
 import "./TimelineStyles.scss";
+
+interface Milestone {
+  year: string;
+  title: string;
+  sub: string;
+  detail: string;
+  icon: string;
+}
+
+const MILESTONES: Milestone[] = [
+  {
+    year: "1942",
+    title: "Pre-Foundational Ideation",
+    sub: "First epistolary correspondence on probabilistic potential",
+    detail: "A pseudonymous exchange of seventeen letters between three independent theorists laid the speculative groundwork that would, three decades later, formalize into the founding axioms of the firm.",
+    icon: "compass",
+  },
+  {
+    year: "1961",
+    title: "Convergence of Disparate Theorems",
+    sub: "Initial multi-disciplinary symposium convened in Geneva",
+    detail: "Forty-two participants from eleven adjacent fields gathered for nine days of structured deliberation, producing the proceedings that would be cited in every subsequent Luthien white paper.",
+    icon: "nodes",
+  },
+  {
+    year: "1972",
+    title: "Foundational Paradigm Establishment",
+    sub: "Inaugural quantum-potential framework conceptualized",
+    detail: "Three founding theorists convened in a converted observatory to draft the first axioms of probabilistic potential mapping. The original notebook still resides in the Luthien archive.",
+    icon: "flag",
+  },
+  {
+    year: "1985",
+    title: "First Systemic Resonance Breakthrough",
+    sub: "Revolutionary meta-algorithmic interface developed",
+    detail: "The inaugural meta-algorithmic interface achieved sustained resonance across seventeen previously incommensurable systems — a result independently replicated within the decade.",
+    icon: "broadcast",
+  },
+  {
+    year: "1997",
+    title: "Quantum Potential Recalibration",
+    sub: "Proprietary Synergistic Development Framework™ initiated",
+    detail: "Recalibration of the firm's core quantum-potential model produced the Synergistic Development Framework™, which has since underpinned every Luthien engagement.",
+    icon: "droplet",
+  },
+  {
+    year: "2012",
+    title: "Emergent Systems Convergence",
+    sub: "Breakthrough in non-linear cognitive mapping achieved",
+    detail: "A multi-year collaboration with three research institutes resolved the longstanding non-linearity problem in cognitive mapping, opening the field to commercial application.",
+    icon: "stack",
+  },
+  {
+    year: "2023",
+    title: "Global Paradigm Expansion",
+    sub: "Comprehensive meta-systemic framework globalized",
+    detail: "The framework was open-sourced under the Luthien Reciprocal License and is now in active deployment across thirty-two jurisdictions.",
+    icon: "sprout",
+  },
+];
+
+const MIN_YEAR = 1942;
+const MAX_YEAR = 2023;
+
+function posFor(year: number): number {
+  return 6 + ((year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR)) * 88;
+}
+
+const milestoneYears = new Set(MILESTONES.map((m) => parseInt(m.year)));
+
+interface Tick {
+  year: number;
+  x: number;
+  isDecade: boolean;
+  isHalf: boolean;
+}
+
+const ticks: Tick[] = [];
+for (let y = MIN_YEAR; y <= MAX_YEAR; y++) {
+  if (milestoneYears.has(y)) continue;
+  const isDecade = y % 10 === 0;
+  const isHalf = !isDecade && y % 5 === 0;
+  ticks.push({ year: y, x: posFor(y), isDecade, isHalf });
+}
+
+function iconSvg(icon: string): string {
+  const base = `width="28" height="28" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"`;
+  switch (icon) {
+    case "compass":
+      return `<svg ${base}><circle cx="15" cy="7" r="2"/><path d="M15 9l-6 16"/><path d="M15 9l6 16"/><path d="M11.5 19h7"/><path d="M9 25l1.2-1.6M21 25l-1.2-1.6" opacity="0.55"/></svg>`;
+    case "nodes":
+      return `<svg ${base}><circle cx="7" cy="8" r="2.5"/><circle cx="23" cy="8" r="2.5"/><circle cx="15" cy="22" r="2.5"/><path d="M9 9.5l5 11M21 9.5l-5 11M9.5 8h13"/><circle cx="15" cy="15" r="1" fill="currentColor" stroke="none"/></svg>`;
+    case "flag":
+      return `<svg ${base} style="transform:translate(2px,3px)"><path d="M6 4v22"/><path d="M6 5h17l-3 5 3 5H6"/><path d="M6 5h6v5H6M12 10h6v5h-6M18 5h5v5h-5M12 5v5M18 10v5M6 15h6M18 15h5" opacity="0.55"/></svg>`;
+    case "broadcast":
+      return `<svg ${base}><circle cx="15" cy="13" r="2" fill="currentColor" stroke="none"/><path d="M11 9a5.5 5.5 0 0 0 0 8M19 9a5.5 5.5 0 0 1 0 8"/><path d="M8.5 6.5a9 9 0 0 0 0 13M21.5 6.5a9 9 0 0 1 0 13"/><path d="M13.5 14.5l-3 11M16.5 14.5l3 11M11.5 22h7"/></svg>`;
+    case "droplet":
+      return `<svg ${base}><path d="M15 4 C 15 4, 7 13, 7 19 a 8 8 0 0 0 16 0 C 23 13, 15 4, 15 4 Z"/><path d="M11.5 19a3.5 3.5 0 0 0 3.5 3.5" opacity="0.55"/></svg>`;
+    case "stack":
+      return `<svg ${base}><ellipse cx="15" cy="9" rx="8" ry="3"/><path d="M7 14c0 1.7 3.6 3 8 3s8-1.3 8-3"/><path d="M7 19c0 1.7 3.6 3 8 3s8-1.3 8-3"/><path d="M7 9v15c0 1.7 3.6 3 8 3s8-1.3 8-3V9"/></svg>`;
+    case "sprout":
+      return `<svg ${base}><path d="M15 26V14"/><path d="M15 14c0-4-3-7-7-7 0 4 3 7 7 7Z" fill="currentColor" fill-opacity="0.12"/><path d="M15 14c0-3.5 3-6 6-6 0 3.5-3 6-6 6Z" fill="currentColor" fill-opacity="0.12"/><path d="M11 26h8"/></svg>`;
+    default:
+      return "";
+  }
+}
+
+const first = MILESTONES[0];
 ---
 
-<div id="timeline-container">
-    <!-- add content here -->
-</div>
+<section id="tl-section">
+  <div id="tl-content">
+    <header id="tl-header">
+      <div class="tl-eyebrow">A half-century of recalibration</div>
+      <h2>Evolution of Thought Leadership</h2>
+    </header>
+
+    <div id="tl-rail">
+      <div id="tl-rail-line"></div>
+
+      {ticks.map((tick) => (
+        <div
+          class:list={["tl-tick", { "is-decade": tick.isDecade, "is-half": tick.isHalf }]}
+          style={`left: calc(${tick.x}% - 0.5px)`}
+        />
+      ))}
+
+      {MILESTONES.map((m, i) => (
+        <button
+          class="tl-milestone"
+          data-index={String(i)}
+          data-above={i % 2 === 0 ? "true" : "false"}
+          data-year={m.year}
+          data-title={m.title}
+          data-sub={m.sub}
+          data-detail={m.detail}
+          style={`left: ${posFor(parseInt(m.year))}%`}
+          aria-label={`${m.year}: ${m.title}`}
+        >
+          <div class="tl-node" />
+          <div class="tl-year">{m.year}</div>
+          <div class="tl-branch">
+            <div class="tl-bubble">
+              <span set:html={iconSvg(m.icon)} />
+            </div>
+            <div class="tl-connector" />
+          </div>
+        </button>
+      ))}
+    </div>
+
+    <div id="tl-footer">
+      <div id="tl-scrub">
+        <button id="tl-prev" class="tl-scrub-btn" disabled>&#8592; Previous</button>
+        <button id="tl-next" class="tl-scrub-btn">Next &#8594;</button>
+      </div>
+    </div>
+
+    <div id="tl-card">
+      <div id="tl-card-year">{first.year}</div>
+      <div id="tl-card-body">
+        <div id="tl-card-sub">Milestone — {first.sub}</div>
+        <div id="tl-card-title">{first.title}</div>
+        <p id="tl-card-detail">{first.detail}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const MILESTONES_DATA = [
+    {
+      year: "1942",
+      title: "Pre-Foundational Ideation",
+      sub: "First epistolary correspondence on probabilistic potential",
+      detail:
+        "A pseudonymous exchange of seventeen letters between three independent theorists laid the speculative groundwork that would, three decades later, formalize into the founding axioms of the firm.",
+    },
+    {
+      year: "1961",
+      title: "Convergence of Disparate Theorems",
+      sub: "Initial multi-disciplinary symposium convened in Geneva",
+      detail:
+        "Forty-two participants from eleven adjacent fields gathered for nine days of structured deliberation, producing the proceedings that would be cited in every subsequent Luthien white paper.",
+    },
+    {
+      year: "1972",
+      title: "Foundational Paradigm Establishment",
+      sub: "Inaugural quantum-potential framework conceptualized",
+      detail:
+        "Three founding theorists convened in a converted observatory to draft the first axioms of probabilistic potential mapping. The original notebook still resides in the Luthien archive.",
+    },
+    {
+      year: "1985",
+      title: "First Systemic Resonance Breakthrough",
+      sub: "Revolutionary meta-algorithmic interface developed",
+      detail:
+        "The inaugural meta-algorithmic interface achieved sustained resonance across seventeen previously incommensurable systems — a result independently replicated within the decade.",
+    },
+    {
+      year: "1997",
+      title: "Quantum Potential Recalibration",
+      sub: "Proprietary Synergistic Development Framework™ initiated",
+      detail:
+        "Recalibration of the firm’s core quantum-potential model produced the Synergistic Development Framework™, which has since underpinned every Luthien engagement.",
+    },
+    {
+      year: "2012",
+      title: "Emergent Systems Convergence",
+      sub: "Breakthrough in non-linear cognitive mapping achieved",
+      detail:
+        "A multi-year collaboration with three research institutes resolved the longstanding non-linearity problem in cognitive mapping, opening the field to commercial application.",
+    },
+    {
+      year: "2023",
+      title: "Global Paradigm Expansion",
+      sub: "Comprehensive meta-systemic framework globalized",
+      detail:
+        "The framework was open-sourced under the Luthien Reciprocal License and is now in active deployment across thirty-two jurisdictions.",
+    },
+  ];
+
+  let active = 0;
+  let hovered = -1;
+
+  const milestones = Array.from(document.querySelectorAll(".tl-milestone"));
+  const prevBtn = document.getElementById("tl-prev");
+  const nextBtn = document.getElementById("tl-next");
+  const cardYear = document.getElementById("tl-card-year");
+  const cardBody = document.getElementById("tl-card-body");
+  const cardSub = document.getElementById("tl-card-sub");
+  const cardTitle = document.getElementById("tl-card-title");
+  const cardDetail = document.getElementById("tl-card-detail");
+
+  function updateStates() {
+    const focused = hovered >= 0 ? hovered : active;
+    milestones.forEach((el, i) => {
+      el.classList.toggle("is-active", i === active);
+      el.classList.toggle("is-focused", i === focused);
+    });
+    if (prevBtn) (prevBtn as HTMLButtonElement).disabled = active === 0;
+    if (nextBtn)
+      (nextBtn as HTMLButtonElement).disabled =
+        active === MILESTONES_DATA.length - 1;
+  }
+
+  function animateCard() {
+    if (!cardYear || !cardBody) return;
+    cardYear.classList.remove("tl-card-animate");
+    cardBody.classList.remove("tl-card-animate");
+    void (cardYear as HTMLElement).offsetWidth;
+    cardYear.classList.add("tl-card-animate");
+    cardBody.classList.add("tl-card-animate");
+  }
+
+  function setActive(index: number) {
+    active = index;
+    const m = MILESTONES_DATA[active];
+    if (cardYear) cardYear.textContent = m.year;
+    if (cardSub) cardSub.textContent = `Milestone — ${m.sub}`;
+    if (cardTitle) cardTitle.textContent = m.title;
+    if (cardDetail) cardDetail.textContent = m.detail;
+    animateCard();
+    updateStates();
+  }
+
+  milestones.forEach((el, i) => {
+    el.addEventListener("click", () => setActive(i));
+    el.addEventListener("mouseenter", () => {
+      hovered = i;
+      updateStates();
+    });
+    el.addEventListener("mouseleave", () => {
+      hovered = -1;
+      updateStates();
+    });
+  });
+
+  prevBtn?.addEventListener("click", () => {
+    if (active > 0) setActive(active - 1);
+  });
+  nextBtn?.addEventListener("click", () => {
+    if (active < MILESTONES_DATA.length - 1) setActive(active + 1);
+  });
+
+  updateStates();
+</script>
