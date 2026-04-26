@@ -1,0 +1,214 @@
+@use "../../styles/variables" as *;
+@import "../../assets/fonts/fonts.css";
+
+$plum: rgb(142, 93, 162);
+$plum-border: rgba($plum, 0.2);
+$paper-warm: #f0eeea;
+
+#people-page {
+  width: 100%;
+}
+
+// ─── Page header ─────────────────────────────────────────────────────────────
+
+#people-header {
+  padding: 4rem 0 3.5rem;
+}
+
+#people-header-content {
+  width: $page-width;
+  max-width: $page-max-width;
+  margin: 0 auto;
+}
+
+.people-eyebrow {
+  font-family: "Grotesk", system-ui, sans-serif;
+  font-size: 0.688rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: $plum;
+  margin: 0 0 1.125rem;
+}
+
+#people-header h1 {
+  font-family: "Dhyana", serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  margin: 0 0 1.5rem;
+  letter-spacing: -0.01em;
+  color: #111;
+}
+
+.people-intro {
+  font-family: "Crimson", serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: #444;
+  margin: 0;
+}
+
+// ─── Era sections ─────────────────────────────────────────────────────────────
+
+.era-section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid $plum-border;
+  background: white;
+
+  &#era-1940s,
+  &#era-1990s {
+    background: $paper-warm;
+  }
+}
+
+.era-content {
+  width: $page-width;
+  max-width: $page-max-width;
+  margin: 0 auto;
+}
+
+// ─── Era header ───────────────────────────────────────────────────────────────
+
+.era-header {
+  margin-bottom: 2.75rem;
+}
+
+.era-eyebrow {
+  font-family: "Grotesk", system-ui, sans-serif;
+  font-size: 0.688rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: $plum;
+  margin: 0 0 0.5rem;
+  display: block;
+}
+
+.era-decade {
+  font-family: "Dhyana", serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1;
+  color: $plum;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.era-title {
+  font-family: "Dhyana", serif;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  color: #111;
+  margin: 0 0 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.era-intro {
+  font-family: "Crimson", serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: #444;
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid $plum-border;
+}
+
+// ─── Photo grid ───────────────────────────────────────────────────────────────
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.photo-card {
+  border-radius: 20px;
+  background: white;
+  border: 1px solid $plum-border;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  &.photo-hero {
+    grid-column: 1 / -1;
+
+    img {
+      height: 400px;
+      object-position: center center;
+    }
+  }
+}
+
+// ─── Photo captions ──────────────────────────────────────────────────────────
+
+.photo-caption {
+  padding: 1.5rem 2rem 1.75rem;
+  flex: 1;
+}
+
+.caption-label {
+  font-family: "Grotesk", system-ui, sans-serif;
+  font-size: 0.625rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: $plum;
+  margin: 0 0 0.5rem;
+}
+
+.caption-title {
+  font-family: "Dhyana", serif;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.2;
+  color: #111;
+  margin: 0 0 0.875rem;
+}
+
+.caption-body {
+  font-family: "Crimson", serif;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: #444;
+  margin: 0;
+}
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+
+@media (max-width: 49em) {
+  #people-header {
+    padding: 2.5rem 0 2rem;
+  }
+
+  #people-header-content,
+  .era-content {
+    width: 90%;
+  }
+
+  .era-section {
+    padding: 2.75rem 0;
+  }
+
+  .photo-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .photo-card.photo-hero {
+    grid-column: 1;
+  }
+
+  .photo-card img,
+  .photo-card.photo-hero img {
+    height: 220px;
+  }
+
+  .photo-caption {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+}
