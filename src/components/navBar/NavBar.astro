@@ -1,90 +1,151 @@
 ---
 import "./NavBarStyles.scss";
 import NavBranding from "../common/navBranding/NavBranding.astro";
+
 const { pathname } = Astro.url;
 const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/our-people", label: "Our People" },
+  { href: "/dev-blog", label: "Dev Blog" },
+  { href: "/contact-us", label: "Contact Us" },
+];
 ---
 
-<script>
-  const mobileMenuButton = document.getElementById("mobileMenuButton");
-  const navBar = document.getElementById("navBar");
-
-  if (mobileMenuButton && navBar) {
-    mobileMenuButton.addEventListener("click", () => {
-      navBar.classList.add("transitioning");
-
-      const isVisible = navBar.getAttribute("data-visible") === "true";
-      navBar.setAttribute("data-visible", (!isVisible).toString());
-      mobileMenuButton.setAttribute("aria-expanded", (!isVisible).toString());
-      mobileMenuButton.classList.toggle("active", !isVisible);
-
-      setTimeout(() => {
-        navBar.classList.remove("transitioning");
-      }, 300);
-    });
-
-    document.addEventListener("click", (event) => {
-      if (
-        navBar.getAttribute("data-visible") === "true" &&
-        event.target !== mobileMenuButton &&
-        !mobileMenuButton.contains(event.target as Node)
-      ) {
-        navBar.classList.add("transitioning");
-        navBar.setAttribute("data-visible", "false");
-        mobileMenuButton.setAttribute("aria-expanded", "false");
-        mobileMenuButton.classList.remove("active");
-        setTimeout(() => {
-          navBar.classList.remove("transitioning");
-        }, 300);
-      }
-    });
+<script is:inline>
+  // Runs synchronously before first paint.
+  // If the user arrived here by clicking a nav link, skip the drop animation.
+  if (sessionStorage.getItem("navNavigating")) {
+    sessionStorage.removeItem("navNavigating");
+    document.documentElement.classList.add("nav-navigating");
   }
 </script>
 
-<div id="navBrandingUnder">
-  <NavBranding />
-</div>
-<div id="container">
-  <button
-    id="mobileMenuButton"
-    aria-expanded="false"
-    aria-controls="navBarLinkContainer"
-  ></button>
-  <div id="navBar" data-visible="false">
-    <div id="navBrandingOver">
+<script>
+  const hamburger = document.getElementById("hamburger") as HTMLButtonElement | null;
+  const overlay = document.getElementById("mobile-overlay") as HTMLElement | null;
+  const header = document.getElementById("site-header") as HTMLElement | null;
+
+  // ── Hamburger / overlay ──────────────────────────────────────────────────────
+  function openOverlay() {
+    hamburger?.setAttribute("aria-expanded", "true");
+    hamburger?.classList.add("is-open");
+    overlay?.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeOverlay() {
+    hamburger?.setAttribute("aria-expanded", "false");
+    hamburger?.classList.remove("is-open");
+    overlay?.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  hamburger?.addEventListener("click", () => {
+    hamburger.getAttribute("aria-expanded") === "true" ? closeOverlay() : openOverlay();
+  });
+
+  overlay?.querySelectorAll("a").forEach((link) =>
+    link.addEventListener("click", closeOverlay)
+  );
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeOverlay();
+  });
+
+  // ── Visual compaction on scroll (purely aesthetic) ───────────────────────────
+  window.addEventListener(
+    "scroll",
+    () => header?.classList.toggle("scrolled", window.scrollY > 40),
+    { passive: true }
+  );
+
+  // ── Magic-line indicator ─────────────────────────────────────────────────────
+  const nav = document.getElementById("desktop-nav") as HTMLElement | null;
+  const indicator = document.getElementById("nav-indicator") as HTMLElement | null;
+
+  function moveIndicatorTo(el: HTMLElement) {
+    if (!nav || !indicator) return;
+    const navRect = nav.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    indicator.style.setProperty("--ind-left", `${elRect.left - navRect.left}px`);
+    indicator.style.setProperty("--ind-width", `${elRect.width}px`);
+  }
+
+  function initIndicator() {
+    if (!nav || !indicator) return;
+    const active = nav.querySelector<HTMLElement>(".nav-link--active");
+    if (!active) return;
+
+    indicator.style.transition = "none";
+    indicator.style.opacity = "1";
+    moveIndicatorTo(active);
+
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        indicator.style.transition = "";
+      })
+    );
+  }
+
+  nav?.querySelectorAll<HTMLElement>(".nav-link").forEach((link) => {
+    link.addEventListener("mouseenter", () => moveIndicatorTo(link));
+    link.addEventListener("mouseleave", () => {
+      const active = nav.querySelector<HTMLElement>(".nav-link--active");
+      if (active) moveIndicatorTo(active);
+    });
+  });
+
+  initIndicator();
+  window.addEventListener("resize", initIndicator);
+
+  // Flag nav-link and branding clicks so the next page skips the entry animation
+  document.querySelectorAll<HTMLAnchorElement>("#nav-list a, #mobile-nav-list a, #navBranding").forEach((link) => {
+    link.addEventListener("click", () => sessionStorage.setItem("navNavigating", "1"));
+  });
+</script>
+
+<div id="nav-container">
+  <header id="site-header">
+    <div id="header-inner">
       <NavBranding />
+
+      <nav id="desktop-nav">
+        <span id="nav-indicator" aria-hidden="true"></span>
+        <ul id="nav-list">
+          {links.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class:list={["nav-link", { "nav-link--active": isActive(href) }]}
+              >{label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <button id="hamburger" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
+  </header>
+</div>
 
-    <div class="nav-divider"></div>
-
-    <nav id="navBarLinkContainer">
-      <ul id="navBarLinkList">
-        <li>
+<div id="mobile-overlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <nav>
+    <ul id="mobile-nav-list">
+      {links.map(({ href, label }, i) => (
+        <li style={`--i: ${i}`}>
           <a
-            href="/"
-            class:list={["nav-link", { "nav-link--active": isActive("/") }]}
-          >Home</a>
+            href={href}
+            class:list={["mobile-nav-link", { "mobile-nav-link--active": isActive(href) }]}
+          >{label}</a>
         </li>
-        <li>
-          <a
-            href="/our-people"
-            class:list={["nav-link", { "nav-link--active": isActive("/our-people") }]}
-          >Our People</a>
-        </li>
-        <li>
-          <a
-            href="/dev-blog"
-            class:list={["nav-link", { "nav-link--active": isActive("/dev-blog") }]}
-          >Dev Blog</a>
-        </li>
-        <li>
-          <a
-            href="/contact-us"
-            class:list={["nav-link", { "nav-link--active": isActive("/contact-us") }]}
-          >Contact Us</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+      ))}
+    </ul>
+  </nav>
 </div>
