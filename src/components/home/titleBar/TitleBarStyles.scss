@@ -2,18 +2,31 @@
 @import "../../../assets/fonts/fonts.css";
 
 #title-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-    
+  padding: 2.6rem 0 3.5rem;
+}
+
+#title-bar-content {
+  width: $page-width;
+  max-width: $page-max-width;
+  margin: 0 auto;
+}
+
+#title-eyebrow {
+  font-family: "Grotesk", system-ui, sans-serif;
+  font-size: 0.688rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgb(142, 93, 162);
+  margin: 0 0 1.125rem;
 }
 
 #title {
-  width: $page-width;
-  max-width: $page-max-width;
-  font-family: "Dhyana", sans-serif;
-  color: black;
-  font-size: clamp(2em, 5vw, 3em);
-  font-weight: lighter;
+  font-family: "Dhyana", serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5vw, 3.2rem);
+  line-height: 1;
+  margin: 0 0 1.5rem;
+  letter-spacing: -0.01em;
+  color: #111;
 }
