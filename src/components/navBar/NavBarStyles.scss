@@ -1,6 +1,11 @@
 @use "../../styles/variables" as *;
 @import "../../assets/fonts/fonts.css";
 
+$plum: rgb(142, 93, 162);
+$plum-border: rgba($plum, 0.2);
+
+// ─── Desktop layout ───────────────────────────────────────────────────────────
+
 #container {
   display: flex;
   justify-content: center;
@@ -12,11 +17,21 @@
   align-items: center;
   margin-top: 50px;
   border-radius: 10px;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid $plum-border;
   height: 55px;
   width: $page-width;
   max-width: $page-max-width;
-  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+.nav-divider {
+  width: 1px;
+  height: 28px;
+  background: $plum-border;
+  flex-shrink: 0;
 }
 
 #navBarLinkContainer {
@@ -24,6 +39,7 @@
   width: 100%;
   justify-content: end;
 }
+
 #navBarLinkList {
   display: flex;
   list-style: none;
@@ -32,84 +48,126 @@
   width: 85%;
   padding: 0 20px;
 }
-#navBarLink {
+
+// ─── Nav links ────────────────────────────────────────────────────────────────
+
+.nav-link {
   text-decoration: none;
-  color: var(--primary-text-color);
+  font-family: "Grotesk", system-ui, sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
   font-weight: 500;
+  color: $primary-color;
+  position: relative;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $plum;
+  }
+
+  &.nav-link--active {
+    color: $plum;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: $plum;
+      border-radius: 1px;
+    }
+  }
 }
 
+// ─── Mobile-only elements hidden on desktop ───────────────────────────────────
 
-  #navBrandingUnder{
-display: none;
-  }
+#navBrandingUnder {
+  display: none;
+}
 
 #mobileMenuButton {
   display: none;
 }
 
+// ─── Mobile ───────────────────────────────────────────────────────────────────
+
 @media (max-width: 49em) {
   #navBar {
-position: fixed;
-z-index: 1000;
-justify-content: space-between;
-flex-direction: column;
-align-items: start;
-inset: 0 0 0 45%;
-padding: min(10vh, 10rem) 2em;
-background: hsl(0 0% 100% / 0.6);
-backdrop-filter: blur(1rem);
-margin: 0;
-border-radius: 0;
-height: 100vh;
-
+    position: fixed;
+    z-index: 1000;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: start;
+    inset: 0 0 0 45%;
+    padding: min(10vh, 10rem) 2em;
+    background: hsl(0 0% 100% / 0.6);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    height: 100vh;
   }
+
+  .nav-divider {
+    display: none;
+  }
+
   #navBarLinkList {
     flex-direction: column;
     gap: 1rem;
   }
-    #navBarLinkContainer {
+
+  #navBarLinkContainer {
     flex-direction: column;
   }
 
   #navBar[data-visible="false"] {
-  transform: translateX(100%);
-}
+    transform: translateX(100%);
+  }
 
   #navBar[data-visible="true"] {
-  transform: translateX(0);
-}
+    transform: translateX(0);
+  }
 
   #navBar.transitioning {
-  transition: transform 0.3s ease-in-out;
-}
-
-#mobileMenuButton {
-display: block;
-position: absolute;
-cursor: pointer;
-z-index: 9999;
-background: url("../../assets/bars-solid-full.svg");
-background-repeat: no-repeat;
-border: 0;
-width: 2rem;
-aspect-ratio: 1;
-top: 3.4rem;
-right: 2rem;
+    transition: transform 0.3s ease-in-out;
   }
-  #navBrandingOver{
+
+  #mobileMenuButton {
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    z-index: 9999;
+    background: url("../../assets/bars-solid-full.svg");
+    background-repeat: no-repeat;
+    border: 0;
+    width: 2rem;
+    aspect-ratio: 1;
+    top: 3.4rem;
+    right: 2rem;
+  }
+
+  #navBrandingOver {
     display: none;
   }
-  #navBrandingUnder{
-position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-top: 2.5rem;
-left: 12vw;
 
+  #navBrandingUnder {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    top: 2.5rem;
+    left: 12vw;
   }
 
   #container {
     padding-top: 105px;
   }
-} 
+
+  .nav-link--active::after {
+    display: none;
+  }
+}

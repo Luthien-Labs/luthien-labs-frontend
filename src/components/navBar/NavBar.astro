@@ -1,6 +1,9 @@
 ---
 import "./NavBarStyles.scss";
 import NavBranding from "../common/navBranding/NavBranding.astro";
+const { pathname } = Astro.url;
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
 <script>
@@ -9,7 +12,6 @@ import NavBranding from "../common/navBranding/NavBranding.astro";
 
   if (mobileMenuButton && navBar) {
     mobileMenuButton.addEventListener("click", () => {
-      // Add transitioning class before changing state
       navBar.classList.add("transitioning");
 
       const isVisible = navBar.getAttribute("data-visible") === "true";
@@ -17,25 +19,21 @@ import NavBranding from "../common/navBranding/NavBranding.astro";
       mobileMenuButton.setAttribute("aria-expanded", (!isVisible).toString());
       mobileMenuButton.classList.toggle("active", !isVisible);
 
-      // Remove transitioning class after animation completes
       setTimeout(() => {
         navBar.classList.remove("transitioning");
       }, 300);
     });
 
-    // Close navBar if clicking anywhere except mobileMenuButton
     document.addEventListener("click", (event) => {
       if (
         navBar.getAttribute("data-visible") === "true" &&
         event.target !== mobileMenuButton &&
         !mobileMenuButton.contains(event.target as Node)
       ) {
-        // Add transitioning class before changing state
         navBar.classList.add("transitioning");
         navBar.setAttribute("data-visible", "false");
         mobileMenuButton.setAttribute("aria-expanded", "false");
         mobileMenuButton.classList.remove("active");
-        // Remove transitioning class after animation completes
         setTimeout(() => {
           navBar.classList.remove("transitioning");
         }, 300);
@@ -43,6 +41,7 @@ import NavBranding from "../common/navBranding/NavBranding.astro";
     });
   }
 </script>
+
 <div id="navBrandingUnder">
   <NavBranding />
 </div>
@@ -50,25 +49,40 @@ import NavBranding from "../common/navBranding/NavBranding.astro";
   <button
     id="mobileMenuButton"
     aria-expanded="false"
-    aria-controls="navBarLinkContainer"></button>
+    aria-controls="navBarLinkContainer"
+  ></button>
   <div id="navBar" data-visible="false">
     <div id="navBrandingOver">
       <NavBranding />
     </div>
 
+    <div class="nav-divider"></div>
+
     <nav id="navBarLinkContainer">
       <ul id="navBarLinkList">
-        <li id="">
-          <a href="/" id="navBarLink">Home</a>
+        <li>
+          <a
+            href="/"
+            class:list={["nav-link", { "nav-link--active": isActive("/") }]}
+          >Home</a>
         </li>
         <li>
-          <a href="/our-people" id="navBarLink">Our People</a>
+          <a
+            href="/our-people"
+            class:list={["nav-link", { "nav-link--active": isActive("/our-people") }]}
+          >Our People</a>
         </li>
         <li>
-          <a href="/dev-blog" id="navBarLink">Dev Blog</a>
+          <a
+            href="/dev-blog"
+            class:list={["nav-link", { "nav-link--active": isActive("/dev-blog") }]}
+          >Dev Blog</a>
         </li>
         <li>
-          <a href="/contact-us" id="navBarLink">Contact Us</a>
+          <a
+            href="/contact-us"
+            class:list={["nav-link", { "nav-link--active": isActive("/contact-us") }]}
+          >Contact Us</a>
         </li>
       </ul>
     </nav>

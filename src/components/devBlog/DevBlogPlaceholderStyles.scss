@@ -1,0 +1,119 @@
+@use "../../styles/variables" as *;
+@import "../../assets/fonts/fonts.css";
+
+$plum: rgb(142, 93, 162);
+$plum-border: rgba($plum, 0.2);
+$paper-warm: #f0eeea;
+
+#dev-blog-page {
+  width: 100%;
+}
+
+// ─── Page header ──────────────────────────────────────────────────────────────
+
+#dev-blog-header {
+  padding: 4rem 0 3.5rem;
+}
+
+#dev-blog-header-content {
+  width: $page-width;
+  max-width: $page-max-width;
+  margin: 0 auto;
+}
+
+.dev-blog-eyebrow {
+  font-family: "Grotesk", system-ui, sans-serif;
+  font-size: 0.688rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: $plum;
+  margin: 0 0 1.125rem;
+}
+
+#dev-blog-header h1 {
+  font-family: "Dhyana", serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  margin: 0 0 1.5rem;
+  letter-spacing: -0.01em;
+  color: #111;
+}
+
+.dev-blog-intro {
+  font-family: "Crimson", serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: #444;
+  margin: 0;
+}
+
+// ─── Body ─────────────────────────────────────────────────────────────────────
+
+#dev-blog-body {
+  padding: 4.5rem 0 6rem;
+  background: white;
+  border-top: 1px solid $plum-border;
+}
+
+#dev-blog-body-content {
+  width: $page-width;
+  max-width: $page-max-width;
+  margin: 0 auto;
+}
+
+// ─── Notice card ─────────────────────────────────────────────────────────────
+
+.dev-blog-notice {
+  background: $paper-warm;
+  border: 1px solid $plum-border;
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  max-width: 40rem;
+}
+
+.notice-label {
+  font-family: "Grotesk", system-ui, sans-serif;
+  font-size: 0.625rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: $plum;
+  margin: 0 0 0.875rem;
+}
+
+.notice-text {
+  font-family: "Crimson", serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: #333;
+  margin: 0 0 1.25rem;
+}
+
+.notice-footer {
+  font-family: "Crimson", serif;
+  font-size: 0.9375rem;
+  color: #888;
+  font-style: italic;
+  margin: 0;
+}
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+
+@media (max-width: 49em) {
+  #dev-blog-header {
+    padding: 2.5rem 0 2rem;
+  }
+
+  #dev-blog-header-content,
+  #dev-blog-body-content {
+    width: 90%;
+  }
+
+  #dev-blog-body {
+    padding: 3rem 0 5rem;
+  }
+
+  .dev-blog-notice {
+    padding: 1.75rem 1.5rem;
+  }
+}
