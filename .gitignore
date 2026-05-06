@@ -6,6 +6,9 @@
 # local build output
 dist/
 
+# compiled client scripts (source of truth is src/scripts/*.ts)
+public/scripts/
+
 # generated types
 .astro/
 

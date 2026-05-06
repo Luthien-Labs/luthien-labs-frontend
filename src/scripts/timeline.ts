@@ -1,16 +1,16 @@
 let active = 0;
 let hovered = -1;
 
-const milestones = document.querySelectorAll(".tl-milestone");
-const prevBtn = document.getElementById("tl-prev");
-const nextBtn = document.getElementById("tl-next");
+const milestones = document.querySelectorAll<HTMLElement>(".tl-milestone");
+const prevBtn = document.getElementById("tl-prev") as HTMLButtonElement | null;
+const nextBtn = document.getElementById("tl-next") as HTMLButtonElement | null;
 const cardYear = document.getElementById("tl-card-year");
 const cardBody = document.getElementById("tl-card-body");
 const cardSub = document.getElementById("tl-card-sub");
 const cardTitle = document.getElementById("tl-card-title");
 const cardDetail = document.getElementById("tl-card-detail");
 
-function updateStates() {
+function updateStates(): void {
   const focused = hovered >= 0 ? hovered : active;
   milestones.forEach((el, i) => {
     el.classList.toggle("is-active", i === active);
@@ -20,7 +20,7 @@ function updateStates() {
   if (nextBtn) nextBtn.disabled = active === milestones.length - 1;
 }
 
-function animateCard() {
+function animateCard(): void {
   if (!cardYear || !cardBody) return;
   cardYear.classList.remove("tl-card-animate");
   cardBody.classList.remove("tl-card-animate");
@@ -29,7 +29,7 @@ function animateCard() {
   cardBody.classList.add("tl-card-animate");
 }
 
-function setActive(index) {
+function setActive(index: number): void {
   active = index;
   const { year, title, sub, detail } = milestones[active].dataset;
   if (cardYear) cardYear.textContent = year ?? "";
