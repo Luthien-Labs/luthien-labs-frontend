@@ -32,7 +32,7 @@ import "./ContactFormStyles.scss";
         to successful transmission under conditions that have not been disclosed.
       </div>
 
-      <form id="contact-form" novalidate>
+      <form id="contact-form" data-api-url={import.meta.env.PUBLIC_API_URL} data-api-key={import.meta.env.PUBLIC_API_KEY} novalidate>
         <div class="form-group">
           <label for="name" class="form-label">Name / Designation</label>
           <input type="text" id="name" name="name" class="form-input" placeholder="Full name as registered" required />
@@ -66,66 +66,4 @@ import "./ContactFormStyles.scss";
   </div>
 </div>
 
-<script>
-  const API_URL = import.meta.env.PUBLIC_API_URL;
-  const API_KEY = import.meta.env.PUBLIC_API_KEY;
-
-  const generateDailyHash = async (): Promise<string> => {
-    const date = new Date().toISOString().split("T")[0];
-    const encoded = new TextEncoder().encode(`${API_KEY}-${date}`);
-    const buffer = await crypto.subtle.digest("SHA-256", encoded);
-    return Array.from(new Uint8Array(buffer))
-      .map((b) => b.toString(16).padStart(2, "0"))
-      .join("");
-  };
-
-  const form = document.getElementById("contact-form") as HTMLFormElement | null;
-  const submitButton = document.getElementById("submit-button") as HTMLButtonElement | null;
-  const successMessage = document.getElementById("form-success") as HTMLElement | null;
-  const errorMessage = document.getElementById("form-error") as HTMLElement | null;
-
-  form?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    if (!form.reportValidity()) return;
-
-    const data = new FormData(form);
-
-    submitButton!.disabled = true;
-    submitButton!.textContent = "Transmitting…";
-    successMessage!.hidden = true;
-    errorMessage!.hidden = true;
-
-    try {
-      const hash = await generateDailyHash();
-      const subject = (data.get("subject") as string).trim();
-
-      const response = await fetch(`${API_URL}/contact`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": hash,
-        },
-        body: JSON.stringify({
-          name: data.get("name"),
-          email: data.get("email"),
-          ...(subject ? { subject } : {}),
-          message: data.get("message"),
-          website: data.get("website") || undefined,
-        }),
-      });
-
-      if (response.ok) {
-        successMessage!.hidden = false;
-        form.reset();
-      } else {
-        errorMessage!.hidden = false;
-      }
-    } catch {
-      errorMessage!.hidden = false;
-    } finally {
-      submitButton!.disabled = false;
-      submitButton!.textContent = "Submit Inquiry";
-    }
-  });
-</script>
+<script is:inline src="/scripts/contact-form.js" type="module"></script>
