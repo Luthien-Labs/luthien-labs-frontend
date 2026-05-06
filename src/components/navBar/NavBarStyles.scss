@@ -1,115 +1,326 @@
+@use "sass:color";
 @use "../../styles/variables" as *;
 @import "../../assets/fonts/fonts.css";
 
-#container {
+$plum: rgb(142, 93, 162);
+$plum-glow: rgba($plum, 0.18);
+$plum-border: rgba($plum, 0.22);
+$navy: #26276d;
+
+// ─── Keyframes ────────────────────────────────────────────────────────────────
+
+@keyframes header-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ─── Nav container ────────────────────────────────────────────────────────────
+//
+// The container is the sticky containing block for #site-header. Its height
+// controls how far the user must scroll before the header is released from
+// sticky and slides off the top of the screen.
+//
+// ↓ TWEAK THIS one value to adjust when the bar starts to disappear on scroll:
+//   release_scroll ≈ --nav-overhang − 1.25rem  (approx)
+//   e.g. 10rem → hides after ~140px of scroll
+//        8rem  → hides after ~108px of scroll
+//        6rem  → hides after ~ 76px of scroll
+//
+// margin-bottom cancels the extra container height so page content isn't pushed down.
+
+#nav-container {
+  --nav-overhang: 10rem;
+  height: calc(58px + var(--nav-overhang));
+  margin-bottom: calc(1.5rem - var(--nav-overhang));
+}
+
+// Suppress entry animation when arriving via a nav-bar link
+html.nav-navigating #site-header {
+  animation: none;
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+#site-header {
+  position: sticky;
+  top: 1.25rem;
+  z-index: 200;
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 1.5rem;
+  animation: header-drop 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
 
-#navBar {
+#header-inner {
   display: flex;
   align-items: center;
-  margin-top: 50px;
-  border-radius: 10px;
-  background-color: white;
-  height: 55px;
+  justify-content: space-between;
   width: $page-width;
   max-width: $page-max-width;
-  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.15);
+  height: 58px;
+  padding: 0 1.25rem 0 0.5rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid $plum-border;
+  box-shadow:
+    0 4px 24px rgba($navy, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  transition:
+    height 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease;
 }
 
-#navBarLinkContainer {
-  display: flex;
-  width: 100%;
-  justify-content: end;
+#site-header.scrolled #header-inner {
+  height: 50px;
+  background: rgba(255, 255, 255, 0.97);
+  border-color: rgba($plum, 0.32);
+  box-shadow:
+    0 8px 40px rgba($navy, 0.13),
+    0 2px 8px rgba(0, 0, 0, 0.06);
 }
-#navBarLinkList {
+
+// ─── Desktop nav ──────────────────────────────────────────────────────────────
+
+#desktop-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#nav-list {
   display: flex;
   list-style: none;
   margin: 0;
-  justify-content: space-between;
-  width: 85%;
-  padding: 0 20px;
+  padding: 0;
+  gap: 1.5rem;
 }
-#navBarLink {
+
+// Magic-line indicator
+#nav-indicator {
+  position: absolute;
+  bottom: -10px;
+  left: var(--ind-left, 0);
+  width: var(--ind-width, 0);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    $plum 0%,
+    color.adjust($plum, $lightness: 18%) 100%
+  );
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
   text-decoration: none;
-  color: var(--primary-text-color);
+  font-family: "Grotesk", system-ui, sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
   font-weight: 500;
-}
+  color: $navy;
+  border-radius: 8px;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 
-
-  #navBrandingUnder{
-display: none;
+  &:hover {
+    color: $plum;
+    background: $plum-glow;
   }
 
-#mobileMenuButton {
-  display: none;
+  &.nav-link--active {
+    color: $plum;
+  }
 }
+
+// ─── Hamburger button ─────────────────────────────────────────────────────────
+
+#hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.3rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: $navy;
+    border-radius: 2px;
+    transform-origin: center;
+    transition:
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.25s ease,
+      background 0.2s ease;
+  }
+
+  &:hover {
+    background: $plum-glow;
+
+    span {
+      background: $plum;
+    }
+  }
+
+  &.is-open {
+    span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+}
+
+// ─── Mobile overlay ───────────────────────────────────────────────────────────
+
+#mobile-overlay {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 2.5rem 3rem;
+  background: rgba($navy, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  clip-path: circle(0% at 100% 0%);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s 0.55s;
+
+  &.is-open {
+    clip-path: circle(150% at 100% 0%);
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0s 0s;
+  }
+}
+
+#mobile-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.4s ease calc(var(--i) * 0.07s + 0.2s),
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)
+        calc(var(--i) * 0.07s + 0.2s);
+  }
+}
+
+#mobile-overlay.is-open #mobile-nav-list li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 0.85rem 0;
+  font-family: "Grotesk", system-ui, sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    color 0.2s ease,
+    padding-left 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    color: #fff;
+    padding-left: 0.6rem;
+  }
+
+  &.mobile-nav-link--active {
+    color: $plum;
+  }
+}
+
+// ─── Mobile breakpoint ────────────────────────────────────────────────────────
 
 @media (max-width: 49em) {
-  #navBar {
-position: fixed;
-z-index: 1000;
-justify-content: space-between;
-flex-direction: column;
-align-items: start;
-inset: 0 0 0 45%;
-padding: min(10vh, 10rem) 2em;
-background: hsl(0 0% 100% / 0.6);
-backdrop-filter: blur(1rem);
-margin: 0;
-border-radius: 0;
-height: 100vh;
-
-  }
-  #navBarLinkList {
-    flex-direction: column;
-    gap: 1rem;
-  }
-    #navBarLinkContainer {
-    flex-direction: column;
+  // On mobile the container itself is sticky so the bar never scrolls away.
+  // The header inside is demoted to normal flow.
+  #nav-container {
+    position: sticky;
+    top: 0;
+    height: 60px;
+    margin-bottom: 0;
+    z-index: 200;
   }
 
-  #navBar[data-visible="false"] {
-  transform: translateX(100%);
-}
-
-  #navBar[data-visible="true"] {
-  transform: translateX(0);
-}
-
-  #navBar.transitioning {
-  transition: transform 0.3s ease-in-out;
-}
-
-#mobileMenuButton {
-display: block;
-position: absolute;
-cursor: pointer;
-z-index: 9999;
-background: url("../../assets/bars-solid-full.svg");
-background-repeat: no-repeat;
-border: 0;
-width: 2rem;
-aspect-ratio: 1;
-top: 3.4rem;
-right: 2rem;
+  #site-header {
+    position: relative;
+    top: auto;
+    margin-top: 0;
+    z-index: auto;
+    animation: none;
   }
-  #navBrandingOver{
+
+  #header-inner {
+    width: 100%;
+    max-width: 100%;
+    height: 60px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    padding: 0 1.25rem;
+  }
+
+  #site-header.scrolled #header-inner {
+    height: 56px;
+  }
+
+  #desktop-nav,
+  #nav-indicator {
     display: none;
   }
-  #navBrandingUnder{
-position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-top: 2.5rem;
-left: 12vw;
 
+  #hamburger {
+    display: flex;
   }
-
-  #container {
-    padding-top: 105px;
-  }
-} 
+}

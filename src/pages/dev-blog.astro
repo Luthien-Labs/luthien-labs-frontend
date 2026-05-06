@@ -1,0 +1,25 @@
+---
+import "../styles/global.scss";
+import Backdrop from "../components/common/backdrop/Backdrop.astro";
+import Layout from "../layouts/Layout.astro";
+import NavBar from "src/components/navBar/NavBar.astro";
+import Footer from "src/components/common/footer/Footer.astro";
+import DevBlogPlaceholder from "src/components/devBlog/DevBlogPlaceholder.astro";
+---
+
+<Layout>
+  <Backdrop />
+  <div class="page-wrapper">
+    <NavBar />
+    <DevBlogPlaceholder />
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+</style>

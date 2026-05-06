@@ -1,37 +1,62 @@
 ---
 import "./NavBarStyles.scss";
 import NavBranding from "../common/navBranding/NavBranding.astro";
+
+const { pathname } = Astro.url;
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/our-people", label: "Our People" },
+  { href: "/dev-blog", label: "Dev Blog" },
+  { href: "/contact-us", label: "Contact Us" },
+];
 ---
 
+<!-- Synchronous: sets nav-navigating class before first paint to suppress entry animation -->
+<script is:inline src="/scripts/nav-init.js"></script>
 <script is:inline src="/scripts/navbar.js" type="module"></script>
-<div id="navBrandingUnder">
-  <NavBranding />
-</div>
-<div id="container">
-  <button
-    id="mobileMenuButton"
-    aria-expanded="false"
-    aria-controls="navBarLinkContainer"></button>
-  <div id="navBar" data-visible="false">
-    <div id="navBrandingOver">
-      <NavBranding />
-    </div>
 
-    <nav id="navBarLinkContainer">
-      <ul id="navBarLinkList">
-        <li id="">
-          <a href="/" id="navBarLink">Home</a>
+<div id="nav-container">
+  <header id="site-header">
+    <div id="header-inner">
+      <NavBranding />
+
+      <nav id="desktop-nav">
+        <span id="nav-indicator" aria-hidden="true"></span>
+        <ul id="nav-list">
+          {links.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class:list={["nav-link", { "nav-link--active": isActive(href) }]}
+              >{label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <button id="hamburger" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+</div>
+
+<div id="mobile-overlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <nav>
+    <ul id="mobile-nav-list">
+      {links.map(({ href, label }, i) => (
+        <li style={`--i: ${i}`}>
+          <a
+            href={href}
+            class:list={["mobile-nav-link", { "mobile-nav-link--active": isActive(href) }]}
+          >{label}</a>
         </li>
-        <li>
-          <a href="/our-people" id="navBarLink">Our People</a>
-        </li>
-        <li>
-          <a href="/dev-blog" id="navBarLink">Dev Blog</a>
-        </li>
-        <li>
-          <a href="/contact-us" id="navBarLink">Contact Us</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+      ))}
+    </ul>
+  </nav>
 </div>
